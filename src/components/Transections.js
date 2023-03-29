@@ -1,6 +1,6 @@
-import react, {useEffect, useState} from 'react';
+import react, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { DataGrid} from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { getTransectionData } from '../api';
 
 
@@ -16,24 +16,23 @@ const columns = [
   { field: 'strategy', headerName: 'strategy', width: 90 },
   { field: 'comments', headerName: 'comments', width: 150 },
   { field: 'action', headerName: 'action', width: 90 },
-  
+
 ];
 
 
-export default function Transections() {
+export default function Transections(props) {
+  const { userId } = props;
   const [rows, setRows] = useState([]);
 
-  useEffect (() => {
-    console.log('use effect');   
-    getTransectionData('ar').then(data => {
-      // console.log('data-- ', data);
+  useEffect(() => {
+    getTransectionData(userId).then(data => {
       setRows(data);
     });
-    
 
-  }, []);
+
+  }, [userId]);
   return (
-    <div style={{ height:600, width: '100%' }}>
+    <div style={{ height: 600, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}

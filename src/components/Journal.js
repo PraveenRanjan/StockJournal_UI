@@ -2,76 +2,151 @@ import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 import { DropzoneArea } from "mui-file-dropzone";
 import Transections from './Transections';
-import { uploadFile } from "../api"
+import FileUpload from './FileUpload';
+
+import { Chip } from '@mui/material';
 
 
 function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-  
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
+  const { children, value, index, ...other } = props;
 
-          </Box>
-        )}
-      </div>
-    );
-  }
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
 
-  function a11yProps(index) {
-    return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
-    };
-  }
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
 
 export default function Journal() {
-    const [value, setValue] = React.useState(0);
-    const [files, setFiles] = React.useState();
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [value, setValue] = React.useState(0);
+  const [files, setFiles] = React.useState();
+  const [userId, setUserId] = React.useState('ar');
 
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
+  // const handleChange = (event) => {
+  //   setAuth(event.target.checked);
+  // };
 
-    const handleFileChange = (files) => {
-      console.log('files-> ', files)
-        setFiles(files);
-        if(files.length){
-          uploadFile(files[0]);
-        }
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-      }
-    return (
+  const handleTabChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const handleMenuClose = (value) => {
+    console.log('menu value-> ', value);
+    setUserId(value);
+    setAnchorEl(null);
+  };
+
+
+  return (
     <>
-        <DropzoneArea onChange={handleFileChange} />
-   
-    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-  <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-    <Tab label="Transections" {...a11yProps(0)} />
-    <Tab label="Summry" {...a11yProps(1)} />
-    
-  </Tabs>
-</Box>
-<TabPanel value={value} index={0}>
-<Transections />
-</TabPanel>
-<TabPanel value={value} index={1}>
-Summry
-</TabPanel>
+      <AppBar position="static" color='transparent'>
+        <Toolbar>
+          {/* <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton> */}
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Trading Journal
+          </Typography>
+          {auth && (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                {/* <AccountCircle /> */}
+                <Chip label={userId}  color="primary"></Chip>
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+              // onClose={handleMenuClose}
+              >
+                <MenuItem onClick={() => handleMenuClose('ar')}>AR</MenuItem>
+                <MenuItem onClick={() => handleMenuClose('pr')}>PR</MenuItem>
+              </Menu>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
+      {/* <DropzoneArea onChange={handleFileChange} /> */}
 
-      </>
-    )
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleTabChange} >
+          <Tab label="Transections" {...a11yProps(0)} />
+          <Tab label="Summry" {...a11yProps(1)} />
+          <Tab label="File upload" {...a11yProps(2)} />
+
+        </Tabs>
+      </Box>
+      <TabPanel value={value} index={0}>
+        <Transections userId={userId} />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Summry
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <FileUpload userId={userId} />
+      </TabPanel>
+
+    </>
+  )
 }

@@ -12,13 +12,10 @@ export default function App() {
   return (
     <Container maxWidth="xl">
       <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Trading Journal
-        </Typography>
         <Journal />
         {/* <ProTip /> */}
         {/* <Transections /> */}
-        
+
       </Box>
     </Container>
   );
