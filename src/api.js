@@ -17,6 +17,22 @@ export const getTransectionData = async (userId) => {
 
 }
 
+export const getSummaryData = async (userId) => {
+    try {
+        const summaryData = await axios({
+            url: '/journal/transactions/summary',
+            method: 'get',
+            headers: { 'userId': userId }
+        })
+        // console.log('tx data--> ', transectionData.data);
+        return summaryData?.data;
+    } catch (e) {
+        console.error('Error getting transection data: ', e)
+    }
+
+}
+
+
 export const uploadFile = async (userId, file) => {
     const data = new FormData();
     data.append('file', file);

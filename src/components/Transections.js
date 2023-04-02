@@ -28,11 +28,9 @@ export default function Transections(props) {
     getTransectionData(userId).then(data => {
       setRows(data);
     });
-
-
   }, [userId]);
   return (
-    <div style={{ height: 600, width: '100%' }}>
+    <div style={{ height: 700, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}

@@ -18,6 +18,7 @@ import Menu from '@mui/material/Menu';
 import { DropzoneArea } from "mui-file-dropzone";
 import Transections from './Transections';
 import FileUpload from './FileUpload';
+import Summray from './Summary';
 
 import { Chip } from '@mui/material';
 
@@ -132,7 +133,7 @@ export default function Journal() {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleTabChange} >
           <Tab label="Transections" {...a11yProps(0)} />
-          <Tab label="Summry" {...a11yProps(1)} />
+          <Tab label="Summary" {...a11yProps(1)} />
           <Tab label="File upload" {...a11yProps(2)} />
 
         </Tabs>
@@ -141,7 +142,7 @@ export default function Journal() {
         <Transections userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Summry
+        <Summray userId={userId}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <FileUpload userId={userId} />
