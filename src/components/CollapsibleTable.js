@@ -15,53 +15,6 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { formatNumber } from '../util';
 
-// function createData(name, calories, fat, carbs, protein, price) {
-//   return {
-//     name,
-//     calories,
-//     fat,
-//     carbs,
-//     protein,
-//     price,
-//     history: [
-//       {
-//         date: '2020-01-05',
-//         customerId: '11091700',
-//         amount: 3,
-//       },
-//       {
-//         date: '2020-01-02',
-//         customerId: 'Anonymous',
-//         amount: 1,
-//       },
-//     ],
-//   };
-// }
-
-// "userId" : "ar",
-// "lastUpdate" : "2023-03-29",
-// "id" : "6422f8952557fb1693f62374",
-// "entryDate" : "2023-03-28",
-// "sellDate" : "2023-03-28",
-// "daysHeld" : 0,
-// "symbol" : "CENLUB",
-// "buyQuantity" : 300,
-// "sellQuantity" : 50,
-// "unsoldQty" : 250,
-// "buyPrice" : 217.42666666666668,
-// "sellPrice" : 200.0,
-// "lastTradingPrice" : 0.0,
-// "buyValue" : 65228.0,
-// "sellValue" : 10000.0,
-// "stopLoss" : 300.0,
-// "strategy" : "Long",
-// "comments" : "Buy on BO",
-// "name" : "CENLUB",
-// "profit" : -871.3333333333339,
-// "pctReturn" : -8.014962899368374,
-// "action" : "new buy",
-// "positionStatus" : "Open",
-
 
 function Row(props) {
     const { row } = props;
@@ -82,24 +35,23 @@ function Row(props) {
                 <TableCell component="th" scope="row">
                     {row.symbol}
                 </TableCell>
-                <TableCell align="right">{row.symbol}</TableCell>
                 <TableCell align="right">{row.unsoldQty}</TableCell>
-                <TableCell align="right">{row.quantity}</TableCell>
                 <TableCell align="right">{formatNumber(row.lastTradingPrice)}</TableCell>
                 <TableCell align="right">{formatNumber(row.profit)}</TableCell>
                 <TableCell align="right">{formatNumber(row.pctReturn)}</TableCell>
-                <TableCell align="right">{row.buyValue}</TableCell>
-                <TableCell align="right">{row.sellValue}</TableCell>
+                <TableCell align="right">{formatNumber(row.buyValue)}</TableCell>
+                <TableCell align="right">{formatNumber(row.sellValue)}</TableCell>
                 <TableCell align="right">{row.buyQuantity}</TableCell>
                 <TableCell align="right">{formatNumber(row.buyPrice)}</TableCell>
                 <TableCell align="right">{row.sellQuantity}</TableCell>
                 <TableCell align="right">{formatNumber(row.sellPrice)}</TableCell>
                 <TableCell align="right">{row.stopLoss}</TableCell>
+                <TableCell align="right">{row.positionStatus}</TableCell>
                 <TableCell align="right">{row.strategy}</TableCell>
                 <TableCell align="right">{row.entryDate}</TableCell>
                 <TableCell align="right">{row.comments}</TableCell>
                 <TableCell align="right">{row.action}</TableCell>
-                <TableCell align="right">{row.positionStatus}</TableCell>
+                
 
             </TableRow>
             <TableRow>
@@ -110,8 +62,7 @@ function Row(props) {
                                 Transections
                             </Typography>
                             <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    price
+                                <TableHead>                                   
                                     <TableRow>
                                         <TableCell>Price</TableCell>
                                         <TableCell>Quantity</TableCell>
@@ -119,8 +70,6 @@ function Row(props) {
                                         <TableCell align="right">Transaction Date</TableCell>
                                         <TableCell align="right">Transaction Type</TableCell>
                                         <TableCell align="right">Stop Loss</TableCell>
-
-                                        {/* <TableCell align="right">Total price ($)</TableCell> */}
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -149,31 +98,7 @@ function Row(props) {
     );
 }
 
-// Row.propTypes = {
-//   row: PropTypes.shape({
-//     calories: PropTypes.number.isRequired,
-//     carbs: PropTypes.number.isRequired,
-//     fat: PropTypes.number.isRequired,
-//     history: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         amount: PropTypes.number.isRequired,
-//         customerId: PropTypes.string.isRequired,
-//         date: PropTypes.string.isRequired,
-//       }),
-//     ).isRequired,
-//     name: PropTypes.string.isRequired,
-//     price: PropTypes.number.isRequired,
-//     protein: PropTypes.number.isRequired,
-//   }).isRequired,
-// };
 
-// const rows = [
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-//   createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-//   createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-//   createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-// ];
 
 export default function CollapsibleTable(props) {
     const { tableData, tableColumnNames } = props;
@@ -183,12 +108,7 @@ export default function CollapsibleTable(props) {
             <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                     <TableRow>
-                        <TableCell />
-                        {/* <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
+                        <TableCell />                       
                         {tableColumnNames.map(col => <TableCell align="right">{col}</TableCell>)}
                     </TableRow>
                 </TableHead>
