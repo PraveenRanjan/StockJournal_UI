@@ -19,6 +19,7 @@ import { DropzoneArea } from "mui-file-dropzone";
 import Transactions from './Transactions';
 import FileUpload from './FileUpload';
 import Summray from './Summary';
+import Holding from './Holding';
 
 import { Chip } from '@mui/material';
 
@@ -135,7 +136,7 @@ export default function Journal() {
           <Tab label="Transactions" {...a11yProps(0)} />
           <Tab label="Summary" {...a11yProps(1)} />
           <Tab label="File upload" {...a11yProps(2)} />
-
+          <Tab label="Holding" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -146,6 +147,9 @@ export default function Journal() {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <FileUpload userId={userId} />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <Holding userId={userId} />
       </TabPanel>
 
     </>

@@ -12,7 +12,7 @@ export const getTransectionData = async (userId) => {
         // console.log('tx data--> ', transectionData.data);
         return transectionData?.data;
     } catch (e) {
-        console.error('Error getting transection data: ', e)
+        console.error('Error getting transaction data: ', e)
     }
 
 }
@@ -27,7 +27,7 @@ export const getSummaryData = async (userId) => {
         // console.log('tx data--> ', transectionData.data);
         return summaryData?.data;
     } catch (e) {
-        console.error('Error getting transection data: ', e)
+        console.error('Error getting transaction summary data: ', e)
     }
 
 }
@@ -47,7 +47,23 @@ export const uploadFile = async (userId, type, file, cash) => {
         })
 
     } catch (e) {
-        console.error('Error getting transection data: ', e)
+        console.error('Error uploading file: ', e)
     }
 }
+
+export const getHoldingData = async (userId) => {
+    try {
+        const holdingData = await axios({
+            url: '/journal//holdings',
+            method: 'get',
+            headers: { 'userId': userId }
+        })
+        // console.log('tx data--> ', transectionData.data);
+        return holdingData?.data;
+    } catch (e) {
+        console.error('Error getting holding data: ', e)
+    }
+
+}
+
 

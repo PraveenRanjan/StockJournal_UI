@@ -22,11 +22,13 @@ import { Card, CardContent, Divider, Paper } from '@mui/material';
 
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
-import { DataGrid } from '@mui/x-data-grid';
+// import { DataGrid } from '@mui/x-data-grid';
 import { getSummaryData } from '../api';
-import { formatNumber } from '../util'
-import { display } from '@mui/system';
+import { formatNumber, roundNumber } from '../util'
+
+//import { display } from '@mui/system';
 import CollapsibleTable from './CollapsibleTable';
+import SummaryReturnBar from './SummaryReturnBar';
 
 // "lastUpdate": "2023-03-25",
 //     "id": "641e2b3525b36c2e0ead6206",
@@ -91,57 +93,70 @@ export default function Summray(props) {
     });
   }, [userId]);
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
 
-        <Grid item xs={12} md={6} >
-          <Card>
-            <CardContent>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-               
-                <div>Avg Win%</div>
-                <div> {formatNumber(transactionKPI?.avgGainPct)}</div>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-               
-                <div>Avg Loss%</div>
-                <div>{formatNumber(transactionKPI?.avgLossPct)}</div>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-               
-                <div>Portfolio gain%</div>
-                <div></div>
-              </div>
-              
-              
-            </CardContent>
-          </Card>
-        </Grid>
+          <Grid item xs={12} md={6} >
+            <Card>
+              <CardContent>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
 
-        <Grid item xs={12} md={6} >
-          <Card>
-            <CardContent>
-              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <div></div>
-                <div>Name</div>
-                <div>Return %</div>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <div>Best</div>
-                <div>{transactionKPI?.bestStock?.symbol}</div>
-                <div>{formatNumber(transactionKPI?.bestStock?.pctReturn)}</div>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <div>Worst</div>
-                <div>{transactionKPI?.worstStock?.symbol}</div>
-                <div>{formatNumber(transactionKPI?.worstStock?.pctReturn)}</div>
-              </div>
-            </CardContent>
-          </Card>
+                  <div>Avg Win%</div>
+                  <div> {formatNumber(transactionKPI?.avgGainPct)}</div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+
+                  <div>Avg Loss%</div>
+                  <div>{formatNumber(transactionKPI?.avgLossPct)}</div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+
+                  <div>Portfolio gain%</div>
+                  <div></div>
+                </div>
+
+
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} md={6} >
+            <Card>
+              <CardContent>
+                <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                  <div></div>
+                  <div>Name</div>
+                  <div>Return %</div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                  <div>Best</div>
+                  <div>{transactionKPI?.bestStock?.symbol}</div>
+                  <div>{formatNumber(transactionKPI?.bestStock?.pctReturn)}</div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                  <div>Worst</div>
+                  <div>{transactionKPI?.worstStock?.symbol}</div>
+                  <div>{formatNumber(transactionKPI?.worstStock?.pctReturn)}</div>
+                </div>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-      <Divider />
-      <CollapsibleTable tableData={summaryData?.summaryList} tableColumnNames={tableColumnNames} />
-    </Box>
+        <Divider />
+        <CollapsibleTable tableData={summaryData?.summaryList} tableColumnNames={tableColumnNames} />
+      </Box>
+      <SummaryReturnBar summaryData=
+        {summaryData?.summaryList
+          .filter(summary => summary.unrealizedProfitPct < 99999999.0)
+          .sort((a,b) => a.unrealizedProfitPct - b.unrealizedProfitPct)
+          .map(summary => {
+            // if (summary.unrealizedProfitPct < 99999999.0) {
+              return { ...summary, unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct) }
+            // }
+          })
+        }
+      />
+    </>
   );
 }
