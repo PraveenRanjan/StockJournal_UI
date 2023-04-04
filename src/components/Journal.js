@@ -16,7 +16,7 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { DropzoneArea } from "mui-file-dropzone";
-import Transections from './Transections';
+import Transactions from './Transactions';
 import FileUpload from './FileUpload';
 import Summray from './Summary';
 
@@ -132,14 +132,14 @@ export default function Journal() {
 
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleTabChange} >
-          <Tab label="Transections" {...a11yProps(0)} />
+          <Tab label="Transactions" {...a11yProps(0)} />
           <Tab label="Summary" {...a11yProps(1)} />
           <Tab label="File upload" {...a11yProps(2)} />
 
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Transections userId={userId} />
+        <Transactions userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Summray userId={userId}/>

@@ -33,12 +33,14 @@ export const getSummaryData = async (userId) => {
 }
 
 
-export const uploadFile = async (userId, file) => {
+export const uploadFile = async (userId, type, file, cash) => {
+    // console.log('uploadFile - ', type);
     const data = new FormData();
     data.append('file', file);
+    data.append('cash', cash);
     try {
         const upload = await axios({
-            url: '/journal/transactions/upload',
+            url: `/journal/${type}/upload`,
             method: 'post',
             headers: { 'userId': userId, "Content-Type": "multipart/form-data" },
             data
