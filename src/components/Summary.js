@@ -29,6 +29,7 @@ import { formatNumber, roundNumber } from '../util'
 //import { display } from '@mui/system';
 import CollapsibleTable from './CollapsibleTable';
 import SummaryReturnBar from './SummaryReturnBar';
+import SummaryHoldingPie from './SummaryHoldingPie';
 
 // "lastUpdate": "2023-03-25",
 //     "id": "641e2b3525b36c2e0ead6206",
@@ -148,15 +149,34 @@ export default function Summray(props) {
       </Box>
       <SummaryReturnBar summaryData=
         {summaryData?.summaryList
-          .filter(summary => summary.unrealizedProfitPct < 99999999.0)
+          // .filter(summary => summary.unrealizedProfitPct < 99999999.0)
           .sort((a,b) => a.unrealizedProfitPct - b.unrealizedProfitPct)
+          .sort((a,b) => a.pctReturn - b.pctReturn)
           .map(summary => {
-            // if (summary.unrealizedProfitPct < 99999999.0) {
-              return { ...summary, unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct) }
-            // }
+            if (summary.unrealizedProfitPct == 99999999.0) {
+              return { ...summary, unrealizedProfitPct: 0 , pctReturn: roundNumber(summary.pctReturn)}
+            } else if (summary.pctReturn == 99999999.0) {
+              return { ...summary, pctReturn: 0, unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct) }
+            } else {
+              return { ...summary, unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct), pctReturn: roundNumber(summary.pctReturn) }
+            }
           })
         }
       />
+      
+      <SummaryHoldingPie summaryData=
+        {summaryData?.summaryList
+          .map(summary => {
+              if (summary.unsoldQty == 0) {
+                summary.currentValue = Number(100)
+              } else {
+                var currValue = summary.unsoldQty * summary.lastTradingPrice
+                // summary.currentValue = Number(formatNumber(currValue));
+                summary.currentValue = Number(1000)
+              }
+              return summary;
+            })
+        }></SummaryHoldingPie>
     </>
   );
 }
