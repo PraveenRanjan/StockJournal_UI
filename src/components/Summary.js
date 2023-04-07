@@ -123,45 +123,34 @@ export default function Summray(props) {
         <SummaryKPI transactionKPI={summaryData?.transactionKPI} />
       </Box>
 
-      <Divider />
-      <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
-        <CollapsibleTable tableData={summaryData?.summaryList} tableColumnNames={tableColumnNames} />
+      
+
+      <Box sx={{ marginTop: 2 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={5}>
+            <SummarySymbolContributionBar summaryList=
+              {summaryData?.summaryList.filter(summary => summary.positionStatus.toUpperCase() === "OPEN").sort((a, b) => b.totalCurrValue - a.totalCurrValue)}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <SummarySymbolContributionBar summaryList=
+              {summaryData?.summaryList.filter(summary => summary.positionStatus.toUpperCase() === "OPEN").sort((a, b) => b.totalCurrValue - a.totalCurrValue)}
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <Box sx={{ marginBottom: 2, background: 'red', height: '20%' }}>
+              box 1
+            </Box>
+            <Box sx={{ background: 'green', height: '60%' }}>
+              box 2
+            </Box>
+          </Grid>
+
+        </Grid>
       </Box>
-
-      <Box sx={{ margin: 5 }}>
-      <Grid container spacing={2}>
-  <Grid item xs={4}>
-    <Item>xs=8</Item>
-  </Grid>
-  <Grid item xs={4}>
-    <Item>xs=8</Item>
-  </Grid>
-  <Grid item xs={4}>
-    <Item>xs=8</Item>
-  </Grid>
-
-  </Grid>
-        <SummarySymbolContributionBar summaryList=
-          {summaryData?.summaryList.filter(summary => summary.positionStatus.toUpperCase() === "OPEN").sort((a, b) => b.totalCurrValue - a.totalCurrValue)}
-        // .slice(5,25)}
-        // .filter(summary => summary.positionStatus == "OPEN")
-        // .sort((a, b) => a.totalCurrValue - b.totalCurrValue)
-        // }
-        />
-
-        <SummaryHoldingPie summaryData=
-          {summaryData?.summaryList
-            .map(summary => {
-              if (summary.unsoldQty == 0) {
-                summary.currentValue = Number(100)
-              } else {
-                var currValue = summary.unsoldQty * summary.lastTradingPrice
-                // summary.currentValue = Number(formatNumber(currValue));
-                summary.currentValue = Number(1000)
-              }
-              return summary;
-            })
-          }></SummaryHoldingPie>
+     
+      <Box sx={{ flexGrow: 1, marginTop: 2 }}>
+        <CollapsibleTable tableData={summaryData?.summaryList} tableColumnNames={tableColumnNames} />
       </Box>
     </>
   );
