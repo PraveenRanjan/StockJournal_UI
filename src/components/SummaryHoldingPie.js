@@ -4,7 +4,7 @@ import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 
 export default function SummaryHoldingPie(props) {
     const { summaryData } = props;
-    console.log(' holding pie = ' , summaryData)
+
     const RADIAN = Math.PI / 180;
     const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;

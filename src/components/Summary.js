@@ -30,6 +30,9 @@ import { formatNumber, roundNumber } from '../util'
 import CollapsibleTable from './CollapsibleTable';
 import SummaryReturnBar from './SummaryReturnBar';
 import SummaryHoldingPie from './SummaryHoldingPie';
+import SummaryKPI from './SummaryKPI';
+import SummarySymbolContributionBar from './SummarySymbolContributionBar';
+
 
 // "lastUpdate": "2023-03-25",
 //     "id": "641e2b3525b36c2e0ead6206",
@@ -87,7 +90,7 @@ export default function Summray(props) {
   // transactionKPI
   useEffect(() => {
     getSummaryData(userId).then(data => {
-      console.log('summary data--> ', data);
+
       setSummaryData(data);
       setTransactionKPI(data.transactionKPI);
       // setRows(data);
@@ -95,78 +98,60 @@ export default function Summray(props) {
   }, [userId]);
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
 
-          <Grid item xs={12} md={6} >
-            <Card>
-              <CardContent>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
+        <SummaryReturnBar summaryData=
+          {summaryData?.summaryList
+            // .filter(summary => summary.unrealizedProfitPct < 99999999.0)
+            .sort((a, b) => a.unrealizedProfitPct - b.unrealizedProfitPct)
+            .sort((a, b) => a.pctReturn - b.pctReturn)
+            .map(summary => {
+              if (summary.unrealizedProfitPct == 99999999.0) {
+                return { ...summary, unrealizedProfitPct: "", pctReturn: roundNumber(summary.pctReturn) }
+              } else if (summary.pctReturn == 99999999.0) {
+                return { ...summary, pctReturn: "", unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct) }
+              } else {
+                return { ...summary, unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct), pctReturn: roundNumber(summary.pctReturn) }
+              }
+            })
+          }
+        />
+      </Box>
+      <Divider />
+      <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
 
-                  <div>Avg Win%</div>
-                  <div> {formatNumber(transactionKPI?.avgGainPct)}</div>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <SummaryKPI transactionKPI={summaryData?.transactionKPI} />
+      </Box>
 
-                  <div>Avg Loss%</div>
-                  <div>{formatNumber(transactionKPI?.avgLossPct)}</div>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-
-                  <div>Portfolio gain%</div>
-                  <div></div>
-                </div>
-
-
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} md={6} >
-            <Card>
-              <CardContent>
-                <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                  <div></div>
-                  <div>Name</div>
-                  <div>Return %</div>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                  <div>Best</div>
-                  <div>{transactionKPI?.bestStock?.symbol}</div>
-                  <div>{formatNumber(transactionKPI?.bestStock?.pctReturn)}</div>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                  <div>Worst</div>
-                  <div>{transactionKPI?.worstStock?.symbol}</div>
-                  <div>{formatNumber(transactionKPI?.worstStock?.pctReturn)}</div>
-                </div>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-        <Divider />
+      <Divider />
+      <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
         <CollapsibleTable tableData={summaryData?.summaryList} tableColumnNames={tableColumnNames} />
       </Box>
-      <SummaryReturnBar summaryData=
-        {summaryData?.summaryList
-          // .filter(summary => summary.unrealizedProfitPct < 99999999.0)
-          .sort((a,b) => a.unrealizedProfitPct - b.unrealizedProfitPct)
-          .sort((a,b) => a.pctReturn - b.pctReturn)
-          .map(summary => {
-            if (summary.unrealizedProfitPct == 99999999.0) {
-              return { ...summary, unrealizedProfitPct: 0 , pctReturn: roundNumber(summary.pctReturn)}
-            } else if (summary.pctReturn == 99999999.0) {
-              return { ...summary, pctReturn: 0, unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct) }
-            } else {
-              return { ...summary, unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct), pctReturn: roundNumber(summary.pctReturn) }
-            }
-          })
-        }
-      />
-      
-      <SummaryHoldingPie summaryData=
-        {summaryData?.summaryList
-          .map(summary => {
+
+      <Box sx={{ margin: 5 }}>
+      <Grid container spacing={2}>
+  <Grid item xs={4}>
+    <Item>xs=8</Item>
+  </Grid>
+  <Grid item xs={4}>
+    <Item>xs=8</Item>
+  </Grid>
+  <Grid item xs={4}>
+    <Item>xs=8</Item>
+  </Grid>
+
+  </Grid>
+        <SummarySymbolContributionBar summaryList=
+          {summaryData?.summaryList.filter(summary => summary.positionStatus.toUpperCase() === "OPEN").sort((a, b) => b.totalCurrValue - a.totalCurrValue)}
+        // .slice(5,25)}
+        // .filter(summary => summary.positionStatus == "OPEN")
+        // .sort((a, b) => a.totalCurrValue - b.totalCurrValue)
+        // }
+        />
+
+        <SummaryHoldingPie summaryData=
+          {summaryData?.summaryList
+            .map(summary => {
               if (summary.unsoldQty == 0) {
                 summary.currentValue = Number(100)
               } else {
@@ -176,7 +161,8 @@ export default function Summray(props) {
               }
               return summary;
             })
-        }></SummaryHoldingPie>
+          }></SummaryHoldingPie>
+      </Box>
     </>
   );
 }

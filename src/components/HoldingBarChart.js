@@ -9,7 +9,9 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend
+    Legend,
+    ComposedChart,
+    Line
   } from "recharts";
 
 export default function HoldingBarChart (props) {
@@ -38,6 +40,7 @@ export default function HoldingBarChart (props) {
           <Brush dataKey="name" height={30} stroke="#8884d8" />
           <Bar dataKey="totalBuyValue" fill="#82ca9d" />
           <Bar dataKey="totalPortfolioValue" fill="#8884d8" />
+          {/* <Line type="monotone" dataKey="totalPortfolioValue" stroke="#ff7300" /> */}
 
         </BarChart>
         <BarChart
@@ -61,6 +64,7 @@ export default function HoldingBarChart (props) {
         <Brush dataKey="name" height={30} stroke="#8884d8" />
         <Bar dataKey="dayChange" fill="#82ca9d" />
         <Bar dataKey="dayChgPct" fill="#8884d8" />
+        {/* <Line type="monotone" dataKey="dayChgPct" stroke="#ff7300" /> */}
 
       </BarChart>
       </>

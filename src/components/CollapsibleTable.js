@@ -102,7 +102,7 @@ function Row(props) {
 
 export default function CollapsibleTable(props) {
     const { tableData, tableColumnNames } = props;
-    console.log('tableData--> ', tableData);
+    // console.log('tableData--> ', tableData);
     return (
         <TableContainer component={Paper} sx={{ maxHeight: 600 }}>
             <Table stickyHeader aria-label="sticky table">
