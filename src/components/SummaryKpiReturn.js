@@ -8,10 +8,7 @@ import {
     CartesianGrid,
     Tooltip,
     Legend,
-    LabelList,
-    Label,
     ReferenceLine,
-    Brush
 } from "recharts";
 
 export default function SummaryKpiReturn(props) {
@@ -23,16 +20,16 @@ export default function SummaryKpiReturn(props) {
             <BarChart
                 layout="vertical"
                 width={350}
-                height={130}
+                height={160}
                 data={stockData}
-                barSize={3}
+                barSize={4}
                 stackOffset="sign"
                 // stackOffset="expand"
                 margin={{
-                    top: 5,
+                    top: 25,
                     right: 10,
                     bottom: 5,
-                    left: 10
+                    left: 5,
                 }}
             >
                 <CartesianGrid stroke="#f5f5f5" />
@@ -46,7 +43,6 @@ export default function SummaryKpiReturn(props) {
                 <Bar dataKey="avgLossingPct" fill="#f78da7" stackId="stack" name="Loss%" />
                 <Bar dataKey="avgOverallGainPct" fill="blue" stackId="stack" name="Overall%" />
             </BarChart>
-
         </div>
     );
 }

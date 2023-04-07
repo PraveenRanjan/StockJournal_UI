@@ -1,7 +1,7 @@
 import react, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Divider, Paper } from '@mui/material';
+import { Divider } from '@mui/material';
 import { getSummaryData } from '../api';
 import { roundNumber } from '../util'
 import CollapsibleTable from './CollapsibleTable';
@@ -10,6 +10,7 @@ import SummaryKpiReturn from './SummaryKpiReturn';
 import SummarySymbolContributionBar from './SummarySymbolContributionBar';
 import SummarySymbolContributionBarClosed from './SummarySymbolContributionBarClosed';
 import {SummaryTableColumnNames} from './Constants'
+import SummaryKpiTable from './SummaryKpiTable';
 
 export default function Summray(props) {
   const { userId } = props;
@@ -55,13 +56,33 @@ export default function Summray(props) {
             />
           </Grid>
           <Grid item xs={3}>
-            <Box sx={{ marginBottom: 2, background: '#c4def6', height: '20%' }}>
+            <Box sx={{ marginBottom: 2, background: '#c4def6', height: '30%' }}>
               <SummaryKpiReturn 
               stockData= {[{...summaryData?.transactionKPI?.stockOpen, type: "Open"}, {...summaryData?.transactionKPI?.stockClosed, type:"Closed"}]}
                />
             </Box>
-            <Box sx={{ background: 'green', height: '60%' }}>
-              box 2
+            <Box sx={{ background: '#8ed1fc', height: '50%' }}>
+              <SummaryKpiTable 
+              kpiData =
+              {
+                [ 
+                { 
+                  name: "Open", 
+                  detail: [
+                    {type:'Best', name:summaryData?.transactionKPI?.stockOpen.bestStock.symbol, gain:summaryData?.transactionKPI?.stockOpen.bestStock.unrealizedProfitPct}, 
+                    {type:'worst', name:summaryData?.transactionKPI?.stockOpen.worstStock.symbol, gain:summaryData?.transactionKPI?.stockOpen.worstStock.unrealizedProfitPct}
+                  ] 
+                },
+                { 
+                  name: "Closed", 
+                  detail: [
+                    {type:'Best', name:summaryData?.transactionKPI?.stockClosed.bestStock.symbol, gain:roundNumber(summaryData?.transactionKPI?.stockClosed.bestStock.pctReturn)}, 
+                    {type:'worst', name:summaryData?.transactionKPI?.stockClosed.worstStock.symbol, gain:roundNumber(summaryData?.transactionKPI?.stockClosed.worstStock.pctReturn)}
+                  ] 
+                }
+                ]
+              } 
+              />
             </Box>
           </Grid>
         </Grid>

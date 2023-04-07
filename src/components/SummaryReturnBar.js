@@ -34,8 +34,8 @@ export default function SummaryReturnBar(props) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="symbol" angle={-50} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
-        <YAxis unit="%"/>
+        <XAxis dataKey="symbol" angle={-50} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <YAxis unit="%" />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px" }} />
         {/* <ReferenceLine x={0} /> */}
