@@ -44,7 +44,7 @@ export default function SummaryReturnBar(props) {
         {/* <Brush dataKey="symbol" height={30} stroke="#8884d8" /> */}
         <ReferenceLine y={0} stroke="#000" />
 
-        <Bar dataKey="unrealizedProfitPct" stackId="stack" fill='green'
+        <Bar dataKey="unrealizedProfitPct" stackId="stack" fill='green' name="Unrealized%"
         // label={{
         //   position: "insideBottom", angle: -60,fill: "blue",offset: 25
         // }} 
@@ -59,7 +59,7 @@ export default function SummaryReturnBar(props) {
             ))
           } */}
         </Bar>
-        <Bar dataKey="pctReturn" fill="#f78da7" stackId="stack"
+        <Bar dataKey="pctReturn" fill="#f78da7" stackId="stack" name="Sold%"
         // label={{
         //   position: "insideBottom",
         //   angle: -60,

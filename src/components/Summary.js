@@ -34,22 +34,6 @@ import SummaryKPI from './SummaryKPI';
 import SummarySymbolContributionBar from './SummarySymbolContributionBar';
 
 
-// "lastUpdate": "2023-03-25",
-//     "id": "641e2b3525b36c2e0ead6206",
-//     "transactionDate": "2023-03-10",
-//     "symbol": "APARINDS",
-//     "transactionType": "BUY",
-//     "quantity": 5,
-//     "price": 2230.04,
-//     "lastTradingPrice": 2294.1,
-//     "totalValue": 11150.2,
-//     "stopLoss": 200,
-//     "strategy": "Long",
-//     "comments": "Buy on BO",
-//     "name": "APARINDS",
-//     "action": "new buy"
-
-
 const columns = [
   { field: 'name', headerName: 'Name', width: 150 },
   { field: 'symbol', headerName: 'Symbol', width: 100 },
@@ -65,8 +49,6 @@ const columns = [
 
 ];
 
-
-
 const tableColumnNames = ['Symbol', 'Quantity', 'Last Trade Price', 'Profit', 'Return %', 'Buy Value', 'Sell Value', 'Buy Qty', 'Buy Price', 'Sell Qty', 'Sell Price', 'Stop Loss', 'Status', 'Strategy', 'Entry Date', 'Comments', 'Action'];
 
 
@@ -79,15 +61,11 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-
-
-
 export default function Summray(props) {
   const { userId } = props;
   const [summaryData, setSummaryData] = useState();
   const [transactionKPI, setTransactionKPI] = useState();
   const [rows, setRows] = useState([]);
-  // transactionKPI
   useEffect(() => {
     getSummaryData(userId).then(data => {
 
@@ -102,7 +80,6 @@ export default function Summray(props) {
       <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
         <SummaryReturnBar summaryData=
           {summaryData?.summaryList
-            // .filter(summary => summary.unrealizedProfitPct < 99999999.0)
             .sort((a, b) => a.unrealizedProfitPct - b.unrealizedProfitPct)
             .sort((a, b) => a.pctReturn - b.pctReturn)
             .map(summary => {
@@ -122,9 +99,6 @@ export default function Summray(props) {
 
         <SummaryKPI transactionKPI={summaryData?.transactionKPI} />
       </Box>
-
-      
-
       <Box sx={{ marginTop: 2 }}>
         <Grid container spacing={2}>
           <Grid item xs={5}>
@@ -147,10 +121,7 @@ export default function Summray(props) {
           </Grid>
 
         </Grid>
-      </Box>
-     
-      <Box sx={{ flexGrow: 1, marginTop: 2 }}>
-        <CollapsibleTable tableData={summaryData?.summaryList} tableColumnNames={tableColumnNames} />
+
       </Box>
     </>
   );
