@@ -1,38 +1,16 @@
 import react, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Grid from '@mui/material/Grid';
-import { Card, CardContent, Divider, Paper } from '@mui/material';
-
-import Typography from '@mui/material/Typography';
-import axios from 'axios';
-// import { DataGrid } from '@mui/x-data-grid';
+import { Divider, Paper } from '@mui/material';
 import { getSummaryData } from '../api';
-import { formatNumber, roundNumber } from '../util'
-
-//import { display } from '@mui/system';
+import { roundNumber } from '../util'
 import CollapsibleTable from './CollapsibleTable';
 import SummaryReturnBar from './SummaryReturnBar';
-import SummaryHoldingPie from './SummaryHoldingPie';
-import SummaryKPI from './SummaryKPI';
+import SummaryKpiReturn from './SummaryKpiReturn';
 import SummarySymbolContributionBar from './SummarySymbolContributionBar';
-
+import SummarySymbolContributionBarClosed from './SummarySymbolContributionBarClosed';
+import SummaryTableColumnNames from './Constants'
 
 const columns = [
   { field: 'name', headerName: 'Name', width: 150 },
@@ -48,8 +26,8 @@ const columns = [
   { field: 'action', headerName: 'action', width: 90 },
 
 ];
-
-const tableColumnNames = ['Symbol', 'Quantity', 'Last Trade Price', 'Profit', 'Return %', 'Buy Value', 'Sell Value', 'Buy Qty', 'Buy Price', 'Sell Qty', 'Sell Price', 'Stop Loss', 'Status', 'Strategy', 'Entry Date', 'Comments', 'Action'];
+const tableColumnNames = ['Symbol', 'Quantity', 'Last Trade Price', 'Profit', 'Return %', 'Buy Value', 'Sell Value', 'Buy Qty'
+                                        , 'Buy Price', 'Sell Qty', 'Sell Price', 'Stop Loss', 'Status', 'Strategy', 'Entry Date', 'Comments', 'Action'];
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -68,15 +46,13 @@ export default function Summray(props) {
   const [rows, setRows] = useState([]);
   useEffect(() => {
     getSummaryData(userId).then(data => {
-
       setSummaryData(data);
       setTransactionKPI(data.transactionKPI);
-      // setRows(data);
+
     });
   }, [userId]);
   return (
     <>
-
       <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
         <SummaryReturnBar summaryData=
           {summaryData?.summaryList
@@ -95,10 +71,6 @@ export default function Summray(props) {
         />
       </Box>
       <Divider />
-      <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
-
-        <SummaryKPI transactionKPI={summaryData?.transactionKPI} />
-      </Box>
       <Box sx={{ marginTop: 2 }}>
         <Grid container spacing={2}>
           <Grid item xs={5}>
@@ -107,21 +79,24 @@ export default function Summray(props) {
             />
           </Grid>
           <Grid item xs={4}>
-            <SummarySymbolContributionBar summaryList=
-              {summaryData?.summaryList.filter(summary => summary.positionStatus.toUpperCase() === "OPEN").sort((a, b) => b.totalCurrValue - a.totalCurrValue)}
+            <SummarySymbolContributionBarClosed summaryList=
+              {summaryData?.summaryList.filter(summary => summary.positionStatus.toUpperCase() === "CLOSED").sort((a, b) => b.sellValue - a.sellValue)}
             />
           </Grid>
           <Grid item xs={3}>
-            <Box sx={{ marginBottom: 2, background: 'red', height: '20%' }}>
-              box 1
+            <Box sx={{ marginBottom: 2, background: '#c4def6', height: '20%' }}>
+              <SummaryKpiReturn 
+              stockData= {[{...summaryData?.transactionKPI?.stockOpen, type: "Open"}, {...summaryData?.transactionKPI?.stockClosed, type:"Closed"}]}
+               />
             </Box>
             <Box sx={{ background: 'green', height: '60%' }}>
               box 2
             </Box>
           </Grid>
-
         </Grid>
-
+      </Box>
+      <Box sx={{ flexGrow: 1, marginTop: 2 }}>
+        <CollapsibleTable tableData={summaryData?.summaryList} tableColumnNames={tableColumnNames} />
       </Box>
     </>
   );

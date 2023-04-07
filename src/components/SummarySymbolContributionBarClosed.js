@@ -1,14 +1,13 @@
 import React from "react";
 
 import {
-  BarChart,
+  ComposedChart,
   Bar,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
-  ComposedChart,
   Line,
 } from "recharts";
 import {roundNumber } from '../util'
@@ -26,20 +25,20 @@ function CustomizedLabel(props) {
 };
 
 function PercentLabel(props) {
-  const {x, y, fill, value, total} = props;
+  const {x, y, fill, value} = props;
    return (<text 
              x={x} 
              y={y} 
              fontSize='x-small'
              fontWeight='bold'
-             fill='blue'
-             textAnchor="start">{roundNumber(value/total * 100)}</text>
+             fill='purple'
+             textAnchor="start">{roundNumber(value)}%</text>
   )
 };
 
-export default function SummarySymbolContributionBar(props) {
+export default function SummarySymbolContributionBarClosed(props) {
   const { summaryList } = props;
-  const total = summaryList?.reduce((result, entry) => (result + entry.totalCurrValue), 0);
+  console.log('summaryList = ', summaryList);
 
   return (
     <div>
@@ -58,11 +57,11 @@ export default function SummarySymbolContributionBar(props) {
         >
           <CartesianGrid stroke="#f5f5f5" />
           <XAxis type="number" />
-          <YAxis dataKey="symbol" type="category" interval={0} scale="point" tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+          <YAxis dataKey="symbol" type="Number" interval={0} scale="point" tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
           <Tooltip />
           <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px" }} />
-          <Bar dataKey="totalCurrValue" barSize={12} fill="#cddc39" name={`Current Value-${total}`} label={<CustomizedLabel />}/>
-          <Line dataKey="totalCurrValue" stroke="#ff7300" name="%Contribution" label={<PercentLabel total={total} />}/>
+          <Bar dataKey="sellValue" barSize={12} fill="#cddc39" name="Sell Value" label={<CustomizedLabel />}/>
+          <Line dataKey="pctReturn" stroke="#ff7300" name="%Return" label={<PercentLabel/>} />
         </ComposedChart>
     </div>
   );
