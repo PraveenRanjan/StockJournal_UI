@@ -34,12 +34,12 @@ export default function SummaryReturnBar(props) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="symbol" angle={-50} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} axisLine={false} hide/>
-        <YAxis unit="%" axisLine={false}/>
+        <XAxis dataKey="symbol" angle={-50} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+        <YAxis unit="%"/>
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px" }} />
         {/* <ReferenceLine x={0} /> */}
-        <ReferenceLine x={0} stroke="#000" />
+        <ReferenceLine y={0} stroke="#000" />
         <Bar dataKey="unrealizedProfitPct" stackId="stack" fill='green' name="Unrealized%">
           <LabelList dataKey="unrealizedProfitPct" position="center" content={renderCustomBarLabel} />
         </Bar>
