@@ -57,10 +57,10 @@ export default function SummarySymbolContributionBar(props) {
       >
         <CartesianGrid stroke="#f5f5f5" />
         <XAxis type="number" />
-        <YAxis dataKey="symbol" type="category" interval={0} scale="point" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <YAxis dataKey="symbol" type="category" scale="band" interval={0}  tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px" }} />
-        <Bar dataKey="totalCurrValue" barSize={12} fill="#cddc39" name={`Current Value-${total}`} label={<CustomizedLabel />} />
+        <Bar dataKey="totalCurrValue" barSize={10} fill="#cddc39" name={`Current Value: ${total}`} label={<CustomizedLabel />} />
         <Line dataKey="totalCurrValue" stroke="#ff7300" name="%Contribution" label={<PercentLabel total={total} />} />
       </ComposedChart>
     </div>

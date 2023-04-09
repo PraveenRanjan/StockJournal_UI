@@ -52,7 +52,7 @@ export default function Summray(props) {
           </Grid>
           <Grid item xs={4}>
             <SummarySymbolContributionBarClosed summaryList=
-              {summaryData?.summaryList.filter(summary => summary.positionStatus.toUpperCase() === "CLOSED").sort((a, b) => b.sellValue - a.sellValue)}
+              {summaryData?.summaryList?.filter(summary => summary.positionStatus.toUpperCase() === "CLOSED").sort((a, b) => b.sellValue - a.sellValue)}
             />
           </Grid>
           <Grid item xs={3}>
