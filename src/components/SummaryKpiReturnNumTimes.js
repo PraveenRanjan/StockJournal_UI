@@ -11,12 +11,12 @@ import {
     ReferenceLine,
 } from "recharts";
 
-export default function SummaryKpiReturn(props) {
+export default function SummaryKpiReturnNumTimes(props) {
     const { stockData } = props;
 
 
     return (
-        <div>Gain/Loss by %
+        <div>Gain/Loss by How many Times%
             <BarChart
                 layout="vertical"
                 width={350}
@@ -38,9 +38,8 @@ export default function SummaryKpiReturn(props) {
                 <Legend wrapperStyle={{ lineHeight: "10px" , fontSize: 'small', fontWeight: 'bold'}}/>
                 <Tooltip />
                 <ReferenceLine x={0} stroke="#e65100" />
-                <Bar dataKey="avgGainingPct" fill='green' stackId="stack"  name="Win%" />
-                <Bar dataKey="avgLossingPct" fill="#f78da7" stackId="stack" name="Loss%" />
-                <Bar dataKey="avgOverallGainPct" fill="blue" stackId="stack" name="Overall%" />
+                <Bar dataKey="gainTimesPct" fill='green' stackId="stack"  name="Win% Times" />
+                <Bar dataKey="lossTimesPct" fill="#f78da7" stackId="stack" name="Loss% Times" />
             </BarChart>
         </div>
     );

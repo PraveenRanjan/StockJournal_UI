@@ -11,6 +11,8 @@ import SummarySymbolContributionBar from './SummarySymbolContributionBar';
 import SummarySymbolContributionBarClosed from './SummarySymbolContributionBarClosed';
 import {SummaryTableColumnNames} from './Constants'
 import SummaryKpiTable from './SummaryKpiTable';
+import SummaryAreaChart from './SummaryAreaChart';
+import SummaryKpiReturnNumTimes from './SummaryKpiReturnNumTimes';
 
 export default function Summray(props) {
   const { userId } = props;
@@ -56,12 +58,17 @@ export default function Summray(props) {
             />
           </Grid>
           <Grid item xs={3}>
-            <Box sx={{ marginBottom: 2, background: '#c4def6', height: '30%' }}>
+            <Box sx={{ marginBottom: 2, background: '#c4def6', height: '25%' }}>
               <SummaryKpiReturn 
               stockData= {[{...summaryData?.transactionKPI?.stockOpen, type: "Open"}, {...summaryData?.transactionKPI?.stockClosed, type:"Closed"}]}
                />
             </Box>
-            <Box sx={{ background: '#8ed1fc', height: '50%' }}>
+            <Box sx={{ marginBottom: 2, background: '#c4def6', height: '25%' }}>
+              <SummaryKpiReturnNumTimes 
+              stockData= {[{...summaryData?.transactionKPI?.stockOpen, type: "Open"}, {...summaryData?.transactionKPI?.stockClosed, type:"Closed"}]}
+               />
+            </Box>
+            <Box sx={{ background: '#8ed1fc', height: '45%' }}>
               <SummaryKpiTable 
               kpiData =
               {
@@ -87,6 +94,24 @@ export default function Summray(props) {
           </Grid>
         </Grid>
       </Box>
+      <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
+        <SummaryAreaChart summaryList={
+          summaryData?.summaryList
+            .sort((a, b) => a.totalCurrValue - b.totalCurrValue)
+            .sort((a, b) => b.sellValue - a.sellValue)
+            .map(summary => {
+              if (summary.unrealizedProfitPct == 99999999.0) {
+                return { ...summary, unrealizedProfitPct: "", pctReturn: roundNumber(summary.pctReturn) }
+              } else if (summary.pctReturn == 99999999.0) {
+                return { ...summary, pctReturn: "", unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct) }
+              } else {
+                return { ...summary, unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct), pctReturn: roundNumber(summary.pctReturn) }
+              }
+            })
+          }
+        />
+      </Box>
+      <Divider />
       <Box sx={{ flexGrow: 1, marginTop: 2 }}>
         <CollapsibleTable tableData={summaryData?.summaryList} tableColumnNames={SummaryTableColumnNames} />
       </Box>

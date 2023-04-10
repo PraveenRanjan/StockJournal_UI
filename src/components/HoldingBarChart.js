@@ -32,15 +32,24 @@ export default function HoldingBarChart(props) {
         }}
       >
         <CartesianGrid stroke="#f5f5f5" />
-        <XAxis dataKey="date" angle={-30} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
-        <YAxis />
+        <XAxis dataKey="date" angle={-15} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+        {/* <XAxis dataKey="date" xAxisId="buy" hide /> */}
+        <YAxis tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
         <Tooltip />
-        <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "40px" }} />
+        <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "40px" , fontSize: 'small', fontWeight: 'bold'}} />
         <ReferenceLine y={0} stroke="#000" />
         {/* <Brush dataKey="name" height={30} stroke="#8884d8" /> */}
         {/* <Bar dataKey="totalBuyValue" fill="#82ca9d" name="Buy Value" /> */}
+        {/* <Bar
+        type="monotone"
+        dataKey="totalBuyValue"
+        xAxisId="buy"
+        fill="#e8e8e8"
+        barSize={25}
+        activeDot={{ r: 8 }}
+      /> */}
         <Bar dataKey="totalPortfolioValue" fill="#8884d8" name="Portfolio Value"/>
-        <Line type="monotone" dataKey="totalPortfolioValue" stroke="#0693e3" name="Portfolio" />
+        <Line type="monotone" dataKey="totalPortfolioValue" stroke="#0693e3" />
       </ComposedChart>
 
       <ComposedChart
@@ -56,8 +65,8 @@ export default function HoldingBarChart(props) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
-        <YAxis />
+        <XAxis dataKey="date" interval={0} angle={-15} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+        <YAxis tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "40px" }} />
         <ReferenceLine y={0} stroke="#000" />

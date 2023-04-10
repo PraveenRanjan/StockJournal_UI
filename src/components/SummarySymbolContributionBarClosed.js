@@ -14,6 +14,7 @@ import {
   ResponsiveContainer,
   AreaChart,
   Area,
+  ReferenceLine,
 } from "recharts";
 import { formatNumber, roundNumber } from '../util'
 
@@ -42,6 +43,22 @@ function RetPercentLabel(props) {
     textAnchor="start">{formatNumber(elem[0].sellValue)}</text>
   )
 };
+
+// const gradientOffset = () => {
+//   const dataMax = Math.max(...data.map((i) => i.uv));
+//   const dataMin = Math.min(...data.map((i) => i.uv));
+
+//   if (dataMax <= 0) {
+//     return 0;
+//   }
+//   if (dataMin >= 0) {
+//     return 1;
+//   }
+
+//   return dataMax / (dataMax - dataMin);
+// };
+
+// const off = gradientOffset();
 
 export default function SummarySymbolContributionBarClosed(props) {
   const { summaryList } = props;
@@ -72,9 +89,9 @@ export default function SummarySymbolContributionBarClosed(props) {
 
       </ComposedChart> */}
       {/* <ResponsiveContainer width="50%" height="50%"> */}
-        {/* <LineChart
-          width={500}
-          height={600}
+        <LineChart
+          width={525}
+          height={400}
           data={summaryList}
           margin={{
             top: 10,
@@ -84,14 +101,15 @@ export default function SummarySymbolContributionBarClosed(props) {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="symbol" />
-          <YAxis yAxisId="left" />
-          <YAxis yAxisId="right" orientation="right" />
+          <XAxis dataKey="symbol" angle={30} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+          <YAxis yAxisId="left" angle={-25} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+          <YAxis yAxisId="right" angle={70} orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
           <Tooltip />
-          <Legend />
-          <Line yAxisId="left" type="monotone" dataKey="pctReturn" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Legend wrapperStyle={{ lineHeight: "10px" , fontSize: 'small', fontWeight: 'bold'}}/>
+          {/* <ReferenceLine y={0} stroke="#000" /> */}
+          <Line yAxisId="left" type="monotone"  dataKey="pctReturn" stroke="#8884d8" activeDot={{ r: 8 }} />
           <Line yAxisId="right" type="monotone" dataKey="sellValue" stroke="#82ca9d" />
-        </LineChart> */}
+        </LineChart>
         {/* </ResponsiveContainer> */}
 
         <AreaChart
@@ -107,15 +125,11 @@ export default function SummarySymbolContributionBarClosed(props) {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="symbol" interval={0}/>
-            <YAxis />
+            <XAxis dataKey="symbol" angle={70} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+            <YAxis angle={-10} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
             <Tooltip />
             <Area type="monotone" dataKey="sellValue" stroke="#8884d8" fill="#8884d8" />
           </AreaChart>
-
-        <p>Maybe some other content</p>
-
-
           <AreaChart
             width={500}
             height={200}
@@ -129,10 +143,18 @@ export default function SummarySymbolContributionBarClosed(props) {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="symbol" interval={0}/>
-            <YAxis />
+            <XAxis dataKey="symbol" angle={70} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+            <YAxis angle={-10} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
             <Tooltip />
-            <Area type="monotone" dataKey="pctReturn" stroke="#82ca9d" fill="#82ca9d" />
+            {/* <defs>
+            <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset={off} stopColor="#82ca9d" stopOpacity={1} />
+              <stop offset={off} stopColor="red" stopOpacity={1} />
+            </linearGradient>
+          </defs> */}
+          <Area type="monotone" dataKey="pctReturn" fill="#82ca9d" stroke="#82ca9d" />
+            {/* <Area type="monotone" dataKey="pctReturn" stroke="#000" fill="url(#splitColor)"  />  */}
+          {/* fill="#82ca9d"  stroke="#82ca9d"  */}
           </AreaChart>
     </div>
   );

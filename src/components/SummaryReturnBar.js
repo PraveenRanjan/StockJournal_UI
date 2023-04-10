@@ -13,7 +13,7 @@ import {
 } from "recharts";
 
 const renderCustomBarLabel = ({ payload, x, y, width, height, value }) => {
-  return <text x={x + width / 2} y={y} fill="black" position="center" textAnchor="middle" dy={-6}>{value || ""}</text>;
+  return <text x={x + width / 2} y={y} fill="black" position="center" textAnchor="middle" fontSize='small' dy={-6}>{value || ""}</text>;
 };
 
 export default function SummaryReturnBar(props) {
@@ -23,7 +23,7 @@ export default function SummaryReturnBar(props) {
   return (
     <div>
       <BarChart
-        width={1450} height={300}
+        width={1450} height={450}
         data={summaryData}
         barSize={12}
         margin={{
@@ -34,13 +34,13 @@ export default function SummaryReturnBar(props) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="symbol" angle={-50} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
-        <YAxis unit="%" />
+        <XAxis dataKey="symbol" angle={70} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <YAxis unit="%" tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
         <Tooltip />
-        <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px" }} />
-        {/* <ReferenceLine x={0} /> */}
+        <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px" , fontSize: 'small', fontWeight: 'bold'}} />
         <ReferenceLine y={0} stroke="#000" />
         <Bar dataKey="unrealizedProfitPct" stackId="stack" fill='green' name="Unrealized%">
+         {/* label={{fontSize: 'small', fontWeight: 'bold'}} */}
           <LabelList dataKey="unrealizedProfitPct" position="center" content={renderCustomBarLabel} />
         </Bar>
         <Bar dataKey="pctReturn" fill="#f78da7" stackId="stack" name="Sold%">
