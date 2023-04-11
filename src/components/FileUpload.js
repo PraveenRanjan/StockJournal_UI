@@ -15,11 +15,13 @@ export default function FileUpload(props) {
   const [type, setType] = useState('transactions');
   const [cash, setCash] = useState();
   const [showCash, setShowCash] = useState(false);
+  const [file, setFile] = useState();
 
   const handleFileChange = (files) => {
     console.log('cash--> ', cash);
     if (files.length) {
-      uploadFile(userId, type, files[0], cash);
+      // uploadFile(userId, type, files[0], cash);
+      setFile(files[0]);
     }
 
   }
@@ -34,7 +36,9 @@ export default function FileUpload(props) {
     console.log('handleCash-> ', event.target.value)
     setCash(event.target.value);
   }
-
+  const handleClick  = (event) => {
+    uploadFile(userId, type, file, cash);
+ }
   return (
     <>
 
@@ -68,6 +72,7 @@ export default function FileUpload(props) {
               />
             }
 
+            <button type="submit" onClick={handleClick}>Submit</button>
           </FormControl>
         </Grid>
 

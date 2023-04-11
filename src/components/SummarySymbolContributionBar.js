@@ -24,6 +24,19 @@ function CustomizedLabel(props) {
   )
 };
 
+function CustomizedLabelBuyValue(props) {
+  const { x, y, fill, value } = props;
+  return (<text
+    x={x}
+    y={y}
+    fontSize='x-small'
+    fontWeight='bold'
+    fill='purple'
+    position='right'
+    textAnchor="end">{value}</text>
+  )
+};
+
 function PercentLabel(props) {
   const { x, y, fill, value, total } = props;
   return (<text
@@ -58,9 +71,12 @@ export default function SummarySymbolContributionBar(props) {
         <CartesianGrid stroke="#f5f5f5" />
         <XAxis type="number" tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
         <YAxis dataKey="symbol" type="category" angle={-15} interval={0}  tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <YAxis dataKey="symbol" type="category" yAxisId="buyValue" hide />
+
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px" , fontSize: 'small', fontWeight: 'bold'}} />
         <Bar dataKey="totalCurrValue" barSize={10} fill="#cddc39" name={`Current Value: ${total}`} label={<CustomizedLabel />} />
+        {/* <Bar dataKey="buyValue" barSize={16} yAxisId="buyValue" fill="#f0efea" name="Buy Value" label={<CustomizedLabelBuyValue />} /> */}
         <Line dataKey="totalCurrValue" stroke="#ff7300" name="%Contribution" label={<PercentLabel total={total} />} />
       </ComposedChart>
     </div>
