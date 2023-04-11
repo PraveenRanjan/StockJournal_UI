@@ -9,15 +9,24 @@ import {
   Tooltip,
   Legend,
   LabelList,
-  ReferenceLine,
+  ReferenceLine, Label,
 } from "recharts";
 
 const renderCustomBarLabel = ({ payload, x, y, width, height, value }) => {
-  return <text x={x + width / 2} y={y} fill="purple" position="center" textAnchor="middle" fontSize='small' dy={-6}>{value || ""}</text>;
+  return <text x={x + width / 2} y={y} fill="purple" textAnchor="middle" fontSize='small' dy={-6}>{value || ""}</text>;
 };
 
-const renderCustomBarLabelClosed = ({ payload, x, y, width, height, value }) => {
-  return <text x={x + width / 2} y={y} fill="blue" position="center" textAnchor="middle" fontSize='small' dy={-6}>{value || ""}</text>;
+const renderCustomizedLabel = (props) => {
+  const { content, ...rest } = props;
+  return <Label {...rest} fontSize='small' fill="purple" fontWeight="Bold" />;
+};
+
+// const renderCustomBarLabelClosed = ({ payload, x, y, width, height, value }) => {
+//   return <text x={x + width / 2} y={y} fill="blue" position="center" textAnchor="middle" fontSize='small' dy={-6}>{value || ""}</text>;
+// };
+const renderCustomizedLabelClosed = (props) => {
+  const { content, ...rest } = props;
+  return <Label {...rest} fontSize='small' fill="blue" fontWeight="Bold" />;
 };
 
 export default function SummaryReturnBar(props) {
@@ -43,12 +52,22 @@ export default function SummaryReturnBar(props) {
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px" , fontSize: 'small', fontWeight: 'bold'}} />
         <ReferenceLine y={0} stroke="#000" />
-        <Bar dataKey="unrealizedProfitPct" stackId="stack" fill='green' name="Unrealized%">
+        <Bar dataKey="unrealizedProfitPct" stackId="stack" fill='#8bc34a' name="Unrealized%">
          {/* label={{fontSize: 'small', fontWeight: 'bold'}} */}
-          <LabelList dataKey="unrealizedProfitPct" position="center" content={renderCustomBarLabel} />
+          {/* <LabelList dataKey="unrealizedProfitPct" position="center" content={renderCustomBarLabel} /> */}
+          <LabelList
+                dataKey="unrealizedProfitPct"
+                position="center"
+                content={renderCustomizedLabel}
+              />
         </Bar>
         <Bar dataKey="pctReturn" fill="#f78da7" stackId="stack" name="Sold%">
-          <LabelList dataKey="pctReturn" position="center" content={renderCustomBarLabelClosed} />
+              <LabelList
+                dataKey="pctReturn"
+                position="center"
+                content={renderCustomizedLabelClosed}
+              />
+          {/* <LabelList dataKey="pctReturn" position="center" content={renderCustomBarLabelClosed} /> */}
         </Bar>
       </BarChart>
     </div>

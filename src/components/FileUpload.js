@@ -18,7 +18,7 @@ export default function FileUpload(props) {
   const [file, setFile] = useState();
 
   const handleFileChange = (files) => {
-    console.log('cash--> ', cash);
+    console.log('files--> ', files);
     if (files.length) {
       // uploadFile(userId, type, files[0], cash);
       setFile(files[0]);

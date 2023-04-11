@@ -90,8 +90,8 @@ export default function SummarySymbolContributionBarClosed(props) {
       </ComposedChart> */}
       {/* <ResponsiveContainer width="50%" height="50%"> */}
         <LineChart
-          width={525}
-          height={400}
+          width={660}
+          height={350}
           data={summaryList}
           margin={{
             top: 10,
@@ -101,9 +101,9 @@ export default function SummarySymbolContributionBarClosed(props) {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="symbol" angle={30} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+          <XAxis dataKey="symbol" angle={50} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
           <YAxis yAxisId="left" angle={-25} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
-          <YAxis yAxisId="right" angle={70} orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+          <YAxis yAxisId="right" angle={80} orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
           <Tooltip />
           <Legend wrapperStyle={{ lineHeight: "10px" , fontSize: 'small', fontWeight: 'bold'}}/>
           {/* <ReferenceLine y={0} stroke="#000" /> */}
@@ -113,7 +113,7 @@ export default function SummarySymbolContributionBarClosed(props) {
         {/* </ResponsiveContainer> */}
 
         <AreaChart
-            width={500}
+            width={640}
             height={200}
             data={summaryList}
             syncId="anyId"
@@ -125,13 +125,13 @@ export default function SummarySymbolContributionBarClosed(props) {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="symbol" angle={70} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
-            <YAxis angle={-10} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+            <XAxis dataKey="symbol" angle={50} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+            <YAxis angle={-70} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
             <Tooltip />
             <Area type="monotone" dataKey="sellValue" stroke="#8884d8" fill="#8884d8" />
           </AreaChart>
           <AreaChart
-            width={500}
+            width={640}
             height={200}
             data={summaryList}
             syncId="anyId"
@@ -143,8 +143,8 @@ export default function SummarySymbolContributionBarClosed(props) {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="symbol" angle={70} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
-            <YAxis angle={-10} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+            <XAxis dataKey="symbol" angle={50} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+            <YAxis angle={-70} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
             <Tooltip />
             {/* <defs>
             <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">

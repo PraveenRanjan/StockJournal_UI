@@ -58,7 +58,7 @@ export default function SummarySymbolContributionBar(props) {
       <ComposedChart
         layout="vertical"
         width={500}
-        height={800}
+        height={750}
         data={summaryList}
         barSize={1}
         margin={{

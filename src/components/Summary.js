@@ -47,12 +47,12 @@ export default function Summray(props) {
       <Divider />
       <Box sx={{ marginTop: 2 }}>
         <Grid container spacing={2}>
-          <Grid item xs={5}>
+          <Grid item xs={4}>
             <SummarySymbolContributionBar summaryList=
               {summaryData?.summaryList.filter(summary => summary.positionStatus.toUpperCase() === "OPEN").sort((a, b) => b.totalCurrValue - a.totalCurrValue)}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <SummarySymbolContributionBarClosed summaryList=
               {summaryData?.summaryList?.filter(summary => summary.positionStatus.toUpperCase() === "CLOSED").sort((a, b) => b.sellValue - a.sellValue)}
             />
