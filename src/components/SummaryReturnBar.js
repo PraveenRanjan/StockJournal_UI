@@ -13,7 +13,11 @@ import {
 } from "recharts";
 
 const renderCustomBarLabel = ({ payload, x, y, width, height, value }) => {
-  return <text x={x + width / 2} y={y} fill="black" position="center" textAnchor="middle" fontSize='small' dy={-6}>{value || ""}</text>;
+  return <text x={x + width / 2} y={y} fill="purple" position="center" textAnchor="middle" fontSize='small' dy={-6}>{value || ""}</text>;
+};
+
+const renderCustomBarLabelClosed = ({ payload, x, y, width, height, value }) => {
+  return <text x={x + width / 2} y={y} fill="blue" position="center" textAnchor="middle" fontSize='small' dy={-6}>{value || ""}</text>;
 };
 
 export default function SummaryReturnBar(props) {
@@ -44,7 +48,7 @@ export default function SummaryReturnBar(props) {
           <LabelList dataKey="unrealizedProfitPct" position="center" content={renderCustomBarLabel} />
         </Bar>
         <Bar dataKey="pctReturn" fill="#f78da7" stackId="stack" name="Sold%">
-          <LabelList dataKey="pctReturn" position="center" content={renderCustomBarLabel} />
+          <LabelList dataKey="pctReturn" position="center" content={renderCustomBarLabelClosed} />
         </Bar>
       </BarChart>
     </div>
