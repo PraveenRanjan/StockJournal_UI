@@ -67,7 +67,6 @@ export default function SummaryReturnBar(props) {
                 position="center"
                 content={renderCustomizedLabelClosed}
               />
-          {/* <LabelList dataKey="pctReturn" position="center" content={renderCustomBarLabelClosed} /> */}
         </Bar>
       </BarChart>
     </div>

@@ -46,7 +46,7 @@ export default function Summray(props) {
       </Box>
       <Divider />
       <Box sx={{ marginTop: 2 }}>
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
           <Grid item xs={4}>
             <SummarySymbolContributionBar summaryList=
               {summaryData?.summaryList.filter(summary => summary.positionStatus.toUpperCase() === "OPEN").sort((a, b) => b.totalCurrValue - a.totalCurrValue)}
@@ -58,17 +58,19 @@ export default function Summray(props) {
             />
           </Grid>
           <Grid item xs={3}>
-            <Box sx={{ marginBottom: 2, background: '#c4def6', height: '25%' }}>
+            <Box sx={{ marginBottom: 2, marginLeft: 2,  background: '#c4def6', height: '25%' }}>
+              {summaryData &&
               <SummaryKpiReturn 
               stockData= {[{...summaryData?.transactionKPI?.stockOpen, type: "Open"}, {...summaryData?.transactionKPI?.stockClosed, type:"Closed"}]}
                />
+              }
             </Box>
-            <Box sx={{ marginBottom: 2, background: '#c4def6', height: '25%' }}>
+            <Box sx={{ marginBottom: 2, marginLeft: 2, background: '#c4def6', height: '25%' }}>
               <SummaryKpiReturnNumTimes 
               stockData= {[{...summaryData?.transactionKPI?.stockOpen, type: "Open"}, {...summaryData?.transactionKPI?.stockClosed, type:"Closed"}]}
                />
             </Box>
-            <Box sx={{ background: '#8ed1fc', height: '45%' }}>
+            <Box sx={{ marginLeft: 2, background: '#8ed1fc', height: '45%' }}>
               <SummaryKpiTable 
               kpiData =
               {

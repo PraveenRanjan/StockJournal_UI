@@ -6,7 +6,6 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
 const HOLDINGS = 'holdings';
 
@@ -14,16 +13,15 @@ export default function FileUpload(props) {
   const { userId } = props;
   const [type, setType] = useState('transactions');
   const [cash, setCash] = useState();
+  const [newFund, setNewFund] = useState();
   const [showCash, setShowCash] = useState(false);
   const [file, setFile] = useState();
 
   const handleFileChange = (files) => {
     console.log('files--> ', files);
     if (files.length) {
-      // uploadFile(userId, type, files[0], cash);
       setFile(files[0]);
     }
-
   }
 
   const handleChange = (event) => {
@@ -36,9 +34,13 @@ export default function FileUpload(props) {
     console.log('handleCash-> ', event.target.value)
     setCash(event.target.value);
   }
-  const handleClick  = (event) => {
-    uploadFile(userId, type, file, cash);
- }
+  const handleFund = (event) => {
+    console.log('handleCash-> ', event.target.value)
+    setNewFund(event.target.value);
+  }
+  const handleClick = (event) => {
+    uploadFile(userId, type, file, cash, newFund);
+  }
   return (
     <>
 
@@ -60,16 +62,28 @@ export default function FileUpload(props) {
             </RadioGroup>
             {/* <FormLabel id="demo-cash"></FormLabel> */}
             {showCash &&
-              <TextField
-                id="outlined-number"
-                label="Cash"
-                type="number"
-                value={cash}
-                onChange={handleCash}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
+              <>
+                <TextField
+                  id="outlined-number"
+                  label="Cash"
+                  type="number"
+                  value={cash}
+                  onChange={handleCash}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                <TextField
+                  id="outlined-number"
+                  label="newFund"
+                  type="number"
+                  value={newFund}
+                  onChange={handleFund}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </>
             }
 
             <button type="submit" onClick={handleClick}>Submit</button>

@@ -1,11 +1,8 @@
-import react, { useEffect, useState } from 'react';
-import HoldingBarChart from './HoldingBarChart';
+import { useEffect, useState } from 'react';
+import HoldingBarDaily from './HoldingBarDaily';
 import { getHoldingData } from '../api';
 
-
-
-export default function Holding(props) {
-    
+export default function HoldingDaily(props) {
   const { userId } = props;
   const [holdingData, setHoldingData] = useState();
 
@@ -17,7 +14,6 @@ export default function Holding(props) {
     });
   }, [userId]);
   return (
-
-    <HoldingBarChart holdingData={holdingData} />
+    <HoldingBarDaily holdingData={holdingData} />
   );
 }

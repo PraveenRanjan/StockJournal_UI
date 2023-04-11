@@ -1,26 +1,17 @@
 import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { DropzoneArea } from "mui-file-dropzone";
 import Transactions from './Transactions';
 import FileUpload from './FileUpload';
 import Summray from './Summary';
-import Holding from './Holding';
-
+import HoldingWrapper from './HoldingWrapper';
 import { Chip } from '@mui/material';
 
 
@@ -59,10 +50,6 @@ export default function Journal() {
   const [files, setFiles] = React.useState();
   const [userId, setUserId] = React.useState('ar');
 
-  // const handleChange = (event) => {
-  //   setAuth(event.target.checked);
-  // };
-
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -82,15 +69,6 @@ export default function Journal() {
     <>
       <AppBar position="static" color='transparent'>
         <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Trading Journal
           </Typography>
@@ -129,7 +107,6 @@ export default function Journal() {
           )}
         </Toolbar>
       </AppBar>
-      {/* <DropzoneArea onChange={handleFileChange} /> */}
 
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleTabChange} >
@@ -149,7 +126,7 @@ export default function Journal() {
         <FileUpload userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <Holding userId={userId} />
+        <HoldingWrapper userId={userId} />
       </TabPanel>
 
     </>

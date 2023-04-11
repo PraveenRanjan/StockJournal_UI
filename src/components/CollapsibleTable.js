@@ -18,7 +18,7 @@ import { formatNumber } from '../util';
 function Row(props) {
     const { row } = props;
     const [open, setOpen] = React.useState(false);
-    
+
     return (
         <React.Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -50,7 +50,7 @@ function Row(props) {
                 <TableCell align="right">{row.entryDate}</TableCell>
                 <TableCell align="right">{row.comments}</TableCell>
                 <TableCell align="right">{row.action}</TableCell>
-                
+
 
             </TableRow>
             <TableRow>
@@ -61,7 +61,7 @@ function Row(props) {
                                 Transections
                             </Typography>
                             <Table size="small" aria-label="purchases">
-                                <TableHead>                                   
+                                <TableHead>
                                     <TableRow>
                                         <TableCell>Price</TableCell>
                                         <TableCell>Quantity</TableCell>
@@ -82,9 +82,6 @@ function Row(props) {
                                             <TableCell align="right">{txRow.transactionDate}</TableCell>
                                             <TableCell align="right">{txRow.transactionType}</TableCell>
                                             <TableCell align="right">{txRow.stopLoss}</TableCell>
-                                            {/* <TableCell align="right">
-                        {Math.round(txRow.amount * row.price * 100) / 100}
-                      </TableCell> */}
                                         </TableRow>
                                     ))}
                                 </TableBody>
@@ -97,8 +94,6 @@ function Row(props) {
     );
 }
 
-
-
 export default function CollapsibleTable(props) {
     const { tableData, tableColumnNames } = props;
     // console.log('tableData--> ', tableData);
@@ -107,7 +102,7 @@ export default function CollapsibleTable(props) {
             <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                     <TableRow>
-                        <TableCell />                       
+                        <TableCell />
                         {tableColumnNames.map(col => <TableCell align="right">{col}</TableCell>)}
                     </TableRow>
                 </TableHead>
