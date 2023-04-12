@@ -3,13 +3,13 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { Divider } from '@mui/material';
 import { getSummaryData } from '../api';
-import { roundNumber } from '../util'
+import { roundNumber, formatNumber } from '../util'
 import CollapsibleTable from './CollapsibleTable';
 import SummaryReturnBar from './SummaryReturnBar';
 import SummaryKpiReturn from './SummaryKpiReturn';
 import SummarySymbolContributionBar from './SummarySymbolContributionBar';
 import SummarySymbolContributionBarClosed from './SummarySymbolContributionBarClosed';
-import {SummaryTableColumnNames} from './Constants'
+import { SummaryTableColumnNames } from './Constants'
 import SummaryKpiTable from './SummaryKpiTable';
 import SummaryAreaChart from './SummaryAreaChart';
 import SummaryKpiReturnNumTimes from './SummaryKpiReturnNumTimes';
@@ -49,7 +49,12 @@ export default function Summray(props) {
         <Grid container spacing={1}>
           <Grid item xs={4}>
             <SummarySymbolContributionBar summaryList=
-              {summaryData?.summaryList.filter(summary => summary.positionStatus.toUpperCase() === "OPEN").sort((a, b) => b.totalCurrValue - a.totalCurrValue)}
+              {summaryData?.summaryList
+                .filter(summary => summary.positionStatus.toUpperCase() === "OPEN")
+                .sort((a, b) => b.totalCurrValue - a.totalCurrValue)
+                // .map(summary => { return { ...summary, totalBuyValue: roundNumber(summary.unrealizedProfit) } })
+                //summary.unsoldQty * summary.buyPrice
+              }
             />
           </Grid>
           <Grid item xs={5}>
@@ -58,39 +63,39 @@ export default function Summray(props) {
             />
           </Grid>
           <Grid item xs={3}>
-            <Box sx={{ marginBottom: 2, marginLeft: 2,  background: '#c4def6', height: '25%' }}>
+            <Box sx={{ marginBottom: 2, marginLeft: 2, background: '#c4def6', height: '25%' }}>
               {summaryData &&
-              <SummaryKpiReturn 
-              stockData= {[{...summaryData?.transactionKPI?.stockOpen, type: "Open"}, {...summaryData?.transactionKPI?.stockClosed, type:"Closed"}]}
-               />
+                <SummaryKpiReturn
+                  stockData={[{ ...summaryData?.transactionKPI?.stockOpen, type: "Open" }, { ...summaryData?.transactionKPI?.stockClosed, type: "Closed" }]}
+                />
               }
             </Box>
             <Box sx={{ marginBottom: 2, marginLeft: 2, background: '#c4def6', height: '25%' }}>
-              <SummaryKpiReturnNumTimes 
-              stockData= {[{...summaryData?.transactionKPI?.stockOpen, type: "Open"}, {...summaryData?.transactionKPI?.stockClosed, type:"Closed"}]}
-               />
+              <SummaryKpiReturnNumTimes
+                stockData={[{ ...summaryData?.transactionKPI?.stockOpen, type: "Open" }, { ...summaryData?.transactionKPI?.stockClosed, type: "Closed" }]}
+              />
             </Box>
             <Box sx={{ marginLeft: 2, background: '#8ed1fc', height: '45%' }}>
-              <SummaryKpiTable 
-              kpiData =
-              {
-                [ 
-                { 
-                  name: "Open", 
-                  detail: [
-                    {type:'Best', name:summaryData?.transactionKPI?.stockOpen.bestStock.symbol, gain:summaryData?.transactionKPI?.stockOpen.bestStock.unrealizedProfitPct}, 
-                    {type:'worst', name:summaryData?.transactionKPI?.stockOpen.worstStock.symbol, gain:summaryData?.transactionKPI?.stockOpen.worstStock.unrealizedProfitPct}
-                  ] 
-                },
-                { 
-                  name: "Closed", 
-                  detail: [
-                    {type:'Best', name:summaryData?.transactionKPI?.stockClosed.bestStock.symbol, gain:roundNumber(summaryData?.transactionKPI?.stockClosed.bestStock.pctReturn)}, 
-                    {type:'worst', name:summaryData?.transactionKPI?.stockClosed.worstStock.symbol, gain:roundNumber(summaryData?.transactionKPI?.stockClosed.worstStock.pctReturn)}
-                  ] 
+              <SummaryKpiTable
+                kpiData=
+                {
+                  [
+                    {
+                      name: "Open",
+                      detail: [
+                        { type: 'Best', name: summaryData?.transactionKPI?.stockOpen.bestStock.symbol, gain: summaryData?.transactionKPI?.stockOpen.bestStock.unrealizedProfitPct },
+                        { type: 'worst', name: summaryData?.transactionKPI?.stockOpen.worstStock.symbol, gain: summaryData?.transactionKPI?.stockOpen.worstStock.unrealizedProfitPct }
+                      ]
+                    },
+                    {
+                      name: "Closed",
+                      detail: [
+                        { type: 'Best', name: summaryData?.transactionKPI?.stockClosed.bestStock.symbol, gain: roundNumber(summaryData?.transactionKPI?.stockClosed.bestStock.pctReturn) },
+                        { type: 'worst', name: summaryData?.transactionKPI?.stockClosed.worstStock.symbol, gain: roundNumber(summaryData?.transactionKPI?.stockClosed.worstStock.pctReturn) }
+                      ]
+                    }
+                  ]
                 }
-                ]
-              } 
               />
             </Box>
           </Grid>
@@ -110,7 +115,7 @@ export default function Summray(props) {
                 return { ...summary, unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct), pctReturn: roundNumber(summary.pctReturn) }
               }
             })
-          }
+        }
         />
       </Box>
       <Divider />

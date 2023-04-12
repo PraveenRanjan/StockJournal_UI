@@ -9,18 +9,24 @@ import {
   Legend,
   ComposedChart,
   Line,
+  LabelList,
+  Label,
 } from "recharts";
-import { roundNumber } from '../util'
+import { roundNumber, formatNumber } from '../util'
 
 function CustomizedLabel(props) {
+  // const { content, ...rest } = props;
   const { x, y, fill, value } = props;
-  return (<text
+  // return <Label {...rest} fontSize='x-small' fill="purple" fontWeight="Bold" position="top"/>;
+  return (
+  <text
     x={x}
     y={y}
     fontSize='x-small'
     fontWeight='bold'
     fill='purple'
     textAnchor="start">{value}</text>
+  
   )
 };
 
@@ -69,7 +75,7 @@ export default function SummarySymbolContributionBar(props) {
         width={500}
         height={750}
         data={summaryList}
-        barSize={1}
+        barSize={12}
         margin={{
           top: 10,
           right: 20,
@@ -80,12 +86,40 @@ export default function SummarySymbolContributionBar(props) {
         <CartesianGrid stroke="#f5f5f5" />
         <XAxis type="number" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <YAxis dataKey="symbol" type="category" angle={-15} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
-        <YAxis dataKey="symbol" type="category" yAxisId="buyValue" hide />
+        <YAxis dataKey="symbol" type="category" yAxisId="profit" hide />
 
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px", fontSize: 'small', fontWeight: 'bold' }} />
-        <Bar dataKey="totalCurrValue" barSize={10} fill="#cddc39" name={`Current Value: ${total}`} label={<CustomizedLabel />} />
-        {/* <Bar dataKey="buyValue" barSize={16} yAxisId="buyValue" fill="#f0efea" name="Buy Value" label={<CustomizedLabelBuyValue />} /> */}
+        <Bar dataKey="totalCurrValue" barSize={12} fill="#b098ea" name={`Current Value: ${roundNumber(total)}`} 
+        label={<CustomizedLabel />} 
+        >
+          {/* <LabelList
+            dataKey="totalCurrValue"
+            position="center"
+            // position="insideLeft"
+            dy={1}
+            offset="5"
+            // angle="-90"
+            fill="purple"
+            fontSize='x-small'
+            fontWeight='bold'
+          /> */}
+          </Bar>
+        {/* <Bar dataKey="totalCurrValue" barSize={10} fill="#cddc39" name={`Current Value: ${total}`} label={<CustomizedLabel />} /> */}
+        <Bar dataKey="unrealizedProfit" barSize={8} yAxisId="profit" fill="#0693e3" name="Profit"
+        //  label={<CustomizedLabelBuyValue />} 
+         >
+          {/* <LabelList
+            dataKey="unrealizedProfit"
+            position="right"
+            dy={1}
+            offset="5"
+            // angle="-90"
+            fill="black"
+            fontSize='x-small'
+            fontWeight='bold'
+          /> */}
+        </Bar>
         <Line dataKey="totalCurrValue" stroke="#ff7300" name="%Contribution" label={<PercentLabel total={total} />} />
       </ComposedChart>
     </div>

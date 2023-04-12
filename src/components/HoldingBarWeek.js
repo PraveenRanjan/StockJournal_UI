@@ -18,8 +18,8 @@ export default function HoldingBarWeek(props) {
   return (
     <div>
       <ComposedChart
-        width={840}
-        height={400}
+        width={600}
+        height={330}
         data={holdingData}
         barSize={15}
         margin={{
@@ -50,8 +50,8 @@ export default function HoldingBarWeek(props) {
       </ComposedChart>
 
       <ComposedChart
-        width={840}
-        height={400}
+        width={600}
+        height={330}
         data={holdingData}
         barSize={15}
         margin={{

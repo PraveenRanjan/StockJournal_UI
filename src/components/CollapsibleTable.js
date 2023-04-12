@@ -58,7 +58,7 @@ function Row(props) {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
                             <Typography variant="h6" gutterBottom component="div">
-                                Transections
+                                Transactions
                             </Typography>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
@@ -96,8 +96,28 @@ function Row(props) {
 
 export default function CollapsibleTable(props) {
     const { tableData, tableColumnNames } = props;
+    // const { rows, setRows } = useState(tableData);
     // console.log('tableData--> ', tableData);
+    
+// const requestSearch = (searchedVal) => {
+//     const filteredRows = tableData.filter((row) => {
+//       return row.symbol.toLowerCase().includes(searchedVal.toLowerCase());
+//     });
+//     setRows(filteredRows);
+//   };
+
+//   const cancelSearch = () => {
+//     setSearched("");
+//     requestSearch(searched);
+//   };
+
     return (
+        <>
+        {/* <SearchBar
+          value={searched}
+          onChange={(searchVal) => requestSearch(searchVal)}
+          onCancelSearch={() => cancelSearch()}
+        /> */}
         <TableContainer component={Paper} sx={{ maxHeight: 600 }}>
             <Table stickyHeader aria-label="sticky table">
                 <TableHead>
@@ -113,5 +133,6 @@ export default function CollapsibleTable(props) {
                 </TableBody>
             </Table>
         </TableContainer>
+        </>
     );
 }

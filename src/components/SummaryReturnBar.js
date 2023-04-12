@@ -18,7 +18,13 @@ const renderCustomBarLabel = ({ payload, x, y, width, height, value }) => {
 
 const renderCustomizedLabel = (props) => {
   const { content, ...rest } = props;
-  return <Label {...rest} fontSize='small' fill="purple" fontWeight="Bold" />;
+
+  var position = "center";
+  if (props.value < 0)  {
+    // position = "bottom";
+
+  }
+  return <Label {...rest} fontSize='x-small' fill="purple" fontWeight="Bold" angle="-90" position = {position}/>;
 };
 
 // const renderCustomBarLabelClosed = ({ payload, x, y, width, height, value }) => {
@@ -26,7 +32,14 @@ const renderCustomizedLabel = (props) => {
 // };
 const renderCustomizedLabelClosed = (props) => {
   const { content, ...rest } = props;
-  return <Label {...rest} fontSize='small' fill="blue" fontWeight="Bold" />;
+  var position = "bottom";
+  if (props.pctReturn < 0)  {
+    position = "bottom";
+    console.log('inside < 0', props.pctReturn);
+  }
+  return <Label {...rest}  position = {position}
+  // fontSize='small' fill="blue" fontWeight="Bold" angle="-90"
+  />;
 };
 
 export default function SummaryReturnBar(props) {
@@ -38,7 +51,7 @@ export default function SummaryReturnBar(props) {
       <BarChart
         width={1450} height={450}
         data={summaryData}
-        barSize={12}
+        barSize={14}
         margin={{
           top: 5,
           right: 30,
@@ -48,7 +61,7 @@ export default function SummaryReturnBar(props) {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="symbol" angle={70} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
-        <YAxis unit="%" tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+        <YAxis type="number" unit="%" tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px" , fontSize: 'small', fontWeight: 'bold'}} />
         <ReferenceLine y={0} stroke="#000" />
@@ -57,14 +70,22 @@ export default function SummaryReturnBar(props) {
           {/* <LabelList dataKey="unrealizedProfitPct" position="center" content={renderCustomBarLabel} /> */}
           <LabelList
                 dataKey="unrealizedProfitPct"
-                position="center"
+                position="top"
+                // angle="-90"
+                // fill="purple"
+                // fontSize='x-small'
+                // fontWeight="Bold"
                 content={renderCustomizedLabel}
               />
         </Bar>
         <Bar dataKey="pctReturn" fill="#f78da7" stackId="stack" name="Sold%">
               <LabelList
                 dataKey="pctReturn"
-                position="center"
+                // position="center"
+                angle="-90"
+                fill="blue"
+                fontSize='x-small'
+                fontWeight="Bold"
                 content={renderCustomizedLabelClosed}
               />
         </Bar>

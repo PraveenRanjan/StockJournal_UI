@@ -9,11 +9,11 @@ export default function HoldingWrapper(props) {
     return (
         <Box sx={{ marginTop: 2 }}>
             <Grid container spacing={1}>
-                <Grid item xs={7}>
+                <Grid item xs={8}>
                     <div>Daily</div>
                     <HoldingDaily userId={userId} />
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={4}>
                     <div>weeekly</div>
                     <HoldingWeek userId={userId} />
                 </Grid>

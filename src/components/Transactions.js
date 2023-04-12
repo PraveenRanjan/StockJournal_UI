@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import MaterialReactTable from 'material-react-table';
-import axios from 'axios';
+
 import { getTransectionData } from '../api';
 
 
