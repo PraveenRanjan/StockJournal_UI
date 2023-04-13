@@ -9,7 +9,6 @@ import SummaryReturnBar from './SummaryReturnBar';
 import SummaryKpiReturn from './SummaryKpiReturn';
 import SummarySymbolContributionBar from './SummarySymbolContributionBar';
 import SummarySymbolContributionBarClosed from './SummarySymbolContributionBarClosed';
-import { SummaryTableColumnNames } from './Constants'
 import SummaryKpiTable from './SummaryKpiTable';
 import SummaryAreaChart from './SummaryAreaChart';
 import SummaryKpiReturnNumTimes from './SummaryKpiReturnNumTimes';
@@ -120,7 +119,7 @@ export default function Summray(props) {
       </Box>
       <Divider />
       <Box sx={{ flexGrow: 1, marginTop: 2 }}>
-        <CollapsibleTable tableData={summaryData?.summaryList} tableColumnNames={SummaryTableColumnNames} />
+        <CollapsibleTable tableData={summaryData?.summaryList} />
       </Box>
     </>
   );
