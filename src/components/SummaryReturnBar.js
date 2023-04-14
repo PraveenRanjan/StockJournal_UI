@@ -32,9 +32,9 @@ const renderCustomizedLabel = (props) => {
 // };
 const renderCustomizedLabelClosed = (props) => {
   const { content, ...rest } = props;
-  var position = "bottom";
+  var position = "center";
   if (props.pctReturn < 0)  {
-    position = "bottom";
+    position = "center";
     console.log('inside < 0', props.pctReturn);
   }
   return <Label {...rest}  position = {position}

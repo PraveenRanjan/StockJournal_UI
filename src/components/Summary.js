@@ -82,15 +82,15 @@ export default function Summray(props) {
                     {
                       name: "Open",
                       detail: [
-                        { type: 'Best', name: summaryData?.transactionKPI?.stockOpen.bestStock.symbol, gain: summaryData?.transactionKPI?.stockOpen.bestStock.unrealizedProfitPct },
-                        { type: 'worst', name: summaryData?.transactionKPI?.stockOpen.worstStock.symbol, gain: summaryData?.transactionKPI?.stockOpen.worstStock.unrealizedProfitPct }
+                        { type: 'Best', name: summaryData?.transactionKPI?.stockOpen.bestStock?.symbol, gain: summaryData?.transactionKPI?.stockOpen.bestStock?.unrealizedProfitPct },
+                        { type: 'worst', name: summaryData?.transactionKPI?.stockOpen.worstStock?.symbol, gain: summaryData?.transactionKPI?.stockOpen.worstStock?.unrealizedProfitPct }
                       ]
                     },
                     {
                       name: "Closed",
                       detail: [
-                        { type: 'Best', name: summaryData?.transactionKPI?.stockClosed.bestStock.symbol, gain: roundNumber(summaryData?.transactionKPI?.stockClosed.bestStock.pctReturn) },
-                        { type: 'worst', name: summaryData?.transactionKPI?.stockClosed.worstStock.symbol, gain: roundNumber(summaryData?.transactionKPI?.stockClosed.worstStock.pctReturn) }
+                        { type: 'Best', name: summaryData?.transactionKPI?.stockClosed.bestStock?.symbol, gain: roundNumber(summaryData?.transactionKPI?.stockClosed.bestStock?.pctReturn) },
+                        { type: 'worst', name: summaryData?.transactionKPI?.stockClosed.worstStock?.symbol, gain: roundNumber(summaryData?.transactionKPI?.stockClosed.worstStock?.pctReturn) }
                       ]
                     }
                   ]

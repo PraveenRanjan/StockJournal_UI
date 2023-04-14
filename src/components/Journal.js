@@ -48,7 +48,7 @@ export default function Journal() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [value, setValue] = React.useState(0);
   const [files, setFiles] = React.useState();
-  const [userId, setUserId] = React.useState('ar');
+  const [userId, setUserId] = React.useState('Test');
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -100,6 +100,7 @@ export default function Journal() {
                 open={Boolean(anchorEl)}
               // onClose={handleMenuClose}
               >
+                <MenuItem onClick={() => handleMenuClose('Test')}>Test</MenuItem>
                 <MenuItem onClick={() => handleMenuClose('ar')}>AR</MenuItem>
                 <MenuItem onClick={() => handleMenuClose('pr')}>PR</MenuItem>
               </Menu>

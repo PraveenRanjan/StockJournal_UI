@@ -105,6 +105,7 @@ export default function SummarySymbolContributionBar(props) {
             fontWeight='bold'
           /> */}
           </Bar>
+          {/* <Bar dataKey="totalCurrValue" barSize={12} fill="#cddc39" name={`Current Value: ${roundNumber(total)}`} label={<CustomizedLabel />} /> */}
         {/* <Bar dataKey="totalCurrValue" barSize={10} fill="#cddc39" name={`Current Value: ${total}`} label={<CustomizedLabel />} /> */}
         <Bar dataKey="unrealizedProfit" barSize={8} yAxisId="profit" fill="#0693e3" name="Profit"
         //  label={<CustomizedLabelBuyValue />} 
