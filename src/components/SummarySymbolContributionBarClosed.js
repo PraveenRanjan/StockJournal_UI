@@ -101,14 +101,15 @@ export default function SummarySymbolContributionBarClosed(props) {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="symbol" angle={50} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+          <XAxis dataKey="symbol" angle={90} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
           <YAxis yAxisId="left" angle={-25} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
           <YAxis yAxisId="right" angle={80} orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
           <Tooltip />
-          <Legend wrapperStyle={{ lineHeight: "10px" , fontSize: 'small', fontWeight: 'bold'}}/>
-          {/* <ReferenceLine y={0} stroke="#000" /> */}
-          <Line yAxisId="left" type="monotone"  dataKey="pctReturn" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line yAxisId="right" type="monotone" dataKey="sellValue" stroke="#82ca9d" />
+          <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px" , fontSize: 'small', fontWeight: 'bold'}}/>
+          {/* <ReferenceLine x={0} stroke="#e65100" /> */}
+          <Line yAxisId="left" type="monotone"  dataKey="pctReturn" stroke="#2196f3" activeDot={{ r: 2 }} name="% Profit"/>
+          {/* <Line yAxisId="right" type="monotone" dataKey="sellValue" stroke="#82ca9d" name="Sell Value"/> */}
+          <Line yAxisId="right" type="monotone" dataKey="profit" name="Profit" stroke="#e91e63" />
         </LineChart>
         {/* </ResponsiveContainer> */}
 

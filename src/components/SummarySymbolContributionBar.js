@@ -11,6 +11,7 @@ import {
   Line,
   LabelList,
   Label,
+  ReferenceLine,
 } from "recharts";
 import { roundNumber, formatNumber } from '../util'
 
@@ -87,7 +88,7 @@ export default function SummarySymbolContributionBar(props) {
         <XAxis type="number" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <YAxis dataKey="symbol" type="category" angle={-15} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <YAxis dataKey="symbol" type="category" yAxisId="profit" hide />
-
+        <ReferenceLine x={0} stroke="#e65100" />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px", fontSize: 'small', fontWeight: 'bold' }} />
         <Bar dataKey="totalCurrValue" barSize={12} fill="#b098ea" name={`Current Value: ${roundNumber(total)}`} 
