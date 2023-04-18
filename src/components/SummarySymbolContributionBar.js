@@ -59,6 +59,7 @@ function PercentLabel(props) {
 export default function SummarySymbolContributionBar(props) {
   const { summaryList } = props;
   const [total, setTotal] = useState(0);
+  console.log('summaryList = ', summaryList );
 
   useEffect(() => {
     const totalValue = summaryList?.reduce((result, entry) => (result + entry.totalCurrValue), 0);
@@ -86,11 +87,14 @@ export default function SummarySymbolContributionBar(props) {
       >
         <CartesianGrid stroke="#f5f5f5" />
         <XAxis type="number" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
-        <YAxis dataKey="symbol" type="category" angle={-15} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <YAxis dataKey="symbol" type="category" angle={-15} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} orientation="left"/>
         <YAxis dataKey="symbol" type="category" yAxisId="profit" hide />
+
+        <XAxis type="number" xAxisId="%profit" orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <ReferenceLine x={0} stroke="#e65100" />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px", fontSize: 'small', fontWeight: 'bold' }} />
+        <Line xAxisId="%profit" type="monotone" dataKey="unrealizedProfitPct" name="%Profit" stroke="#00796b" />
         <Bar dataKey="totalCurrValue" barSize={12} fill="#b098ea" name={`Current Value: ${roundNumber(total)}`} 
         label={<CustomizedLabel />} 
         >
