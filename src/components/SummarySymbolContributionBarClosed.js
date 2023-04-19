@@ -126,7 +126,7 @@ export default function SummarySymbolContributionBarClosed(props) {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="symbol" angle={50} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+            <XAxis dataKey="symbol" angle={90} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
             <YAxis angle={-70} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
             <Tooltip />
             <Area type="monotone" dataKey="sellValue" stroke="#8884d8" fill="#8884d8" />
@@ -144,7 +144,7 @@ export default function SummarySymbolContributionBarClosed(props) {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="symbol" angle={50} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+            <XAxis dataKey="symbol" angle={90} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
             <YAxis angle={-70} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
             <Tooltip />
             {/* <defs>
