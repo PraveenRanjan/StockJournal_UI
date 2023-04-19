@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
   LabelList,
-  ReferenceLine, Label,
+  ReferenceLine, Label, ComposedChart, Line
 } from "recharts";
 
 const renderCustomBarLabel = ({ payload, x, y, width, height, value }) => {
@@ -48,7 +48,7 @@ export default function SummaryReturnBar(props) {
 
   return (
     <div>
-      <BarChart
+      <ComposedChart
         width={1450} height={450}
         data={summaryData}
         barSize={14}
@@ -62,6 +62,8 @@ export default function SummaryReturnBar(props) {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="symbol" angle={70} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <YAxis type="number" unit="%" tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+
+        <YAxis type="number" yAxisId="currValue" orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px" , fontSize: 'small', fontWeight: 'bold'}} />
         <ReferenceLine y={0} stroke="#000" />
@@ -89,7 +91,9 @@ export default function SummaryReturnBar(props) {
                 content={renderCustomizedLabelClosed}
               />
         </Bar>
-      </BarChart>
+        <Line yAxisId="currValue" type="monotone" dataKey="totalCurrValue" name="Current Value" stroke="#1a237e" />
+        <Line yAxisId="currValue" type="monotone" dataKey="sellValue" name="Sold Value" stroke="#e65100" legendType="star"/>
+      </ComposedChart>
     </div>
   );
 }
