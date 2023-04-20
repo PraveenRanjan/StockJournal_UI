@@ -60,7 +60,7 @@ export default function SummaryReturnBar(props) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="symbol" angle={70} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <XAxis dataKey="symbol" angle={-90} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <YAxis type="number" unit="%" tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
 
         <YAxis type="number" yAxisId="currValue" orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
