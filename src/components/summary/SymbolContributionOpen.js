@@ -52,7 +52,7 @@ const renderCustomizedLabel = (props) => {
 
 const renderCustomizedLabelPct = (props) => {
   const { content, ...rest } = props;
-  return <Label {...rest} fontSize='x-small' fill="purple" fontWeight="Bold"  />;
+  return <Label {...rest} fontSize='x-small' fontWeight="Bold"  />;
 };
 
 export default function SymbolContributionOpen(props) {
@@ -91,7 +91,9 @@ export default function SymbolContributionOpen(props) {
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px", fontSize: 'small', fontWeight: 'bold' }} />
         <Line yAxisId="%profit" type="monotone" dataKey="unrealizedProfitPct" name="%Profit" stroke="#00796b" />
-        <Bar dataKey="totalCurrValue" barSize={12} fill="#b098ea" name={`Current Value: ${roundNumber(total)}`} 
+        <Bar dataKey="totalCurrValue" barSize={0} fill="black" name={`Total Value: ${roundNumber(total)}`} />
+
+        <Bar dataKey="totalCurrValue" barSize={12} fill="#b098ea" name='Current Value' 
         // label={<CustomizedLabel />} 
         >
             <LabelList
@@ -106,7 +108,17 @@ export default function SymbolContributionOpen(props) {
             <LabelList
             dataKey="unrealizedProfitPct"
             position="right"
-            fill="#263238"
+            angle="-90"
+            fill="#00796b"
+            fontSize='x-small'
+            fontWeight="Bold"
+            content={renderCustomizedLabelPct}
+          />
+          <LabelList
+            dataKey="unrealizedProfit"
+            position="left"
+            angle="-90"
+            fill="#0693e3"
             fontSize='x-small'
             fontWeight="Bold"
             content={renderCustomizedLabelPct}
