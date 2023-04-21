@@ -13,7 +13,7 @@ import SymbolContributionOpen3 from './SymbolContributionOpen3';
 import SummarySymbolContributionBarClosed from './SummarySymbolContributionBarClosed';
 import SummaryKpiTable53 from './SummaryKpiTable53';
 import SummaryAreaChart from './SummaryAreaChart';
-import SummaryKpiReturnNumTimes from './SummaryKpiReturnNumTimes52';
+import SummaryKpiReturnNumTimes52 from './SummaryKpiReturnNumTimes52';
 
 export default function Summray(props) {
   const { userId } = props;
