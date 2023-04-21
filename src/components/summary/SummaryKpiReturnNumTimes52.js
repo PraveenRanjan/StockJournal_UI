@@ -11,7 +11,7 @@ import {
     ReferenceLine,
 } from "recharts";
 
-export default function SummaryKpiReturnNumTimes(props) {
+export default function SummaryKpiReturnNumTimes52(props) {
     const { stockData } = props;
 
 

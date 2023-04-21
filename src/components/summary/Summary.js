@@ -5,15 +5,15 @@ import { Divider } from '@mui/material';
 import { getSummaryData } from '../../api';
 import { roundNumber, formatNumber } from '../../util'
 import CollapsibleTable from './CollapsibleTable';
-import SummaryReturnBarOpen from './SummaryReturnBarOpen';
-import SummaryReturnBarClosed from './SummaryReturnBarClosed';
-import SummaryKpiReturn from './SummaryKpiReturn';
+import SummaryReturnBarOpen1 from './SummaryReturnBarOpen1';
+import SummaryReturnBarClosed2 from './SummaryReturnBarClosed2';
+import SummaryKpiReturn51 from './SummaryKpiReturn51';
 import SummarySymbolContributionBar from './SummarySymbolContributionBar';
-import SymbolContributionOpen from './SymbolContributionOpen';
+import SymbolContributionOpen3 from './SymbolContributionOpen3';
 import SummarySymbolContributionBarClosed from './SummarySymbolContributionBarClosed';
-import SummaryKpiTable from './SummaryKpiTable';
+import SummaryKpiTable53 from './SummaryKpiTable53';
 import SummaryAreaChart from './SummaryAreaChart';
-import SummaryKpiReturnNumTimes from './SummaryKpiReturnNumTimes';
+import SummaryKpiReturnNumTimes from './SummaryKpiReturnNumTimes52';
 
 export default function Summray(props) {
   const { userId } = props;
@@ -29,7 +29,7 @@ export default function Summray(props) {
   return (
     <>
       <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
-        <SummaryReturnBarOpen summaryData=
+        <SummaryReturnBarOpen1 summaryData=
           {summaryData?.summaryList?.filter(summary => summary.positionStatus.toUpperCase() === "OPEN")
             .sort((a, b) => a.unrealizedProfitPct - b.unrealizedProfitPct)
             .map(summary => {
@@ -41,7 +41,7 @@ export default function Summray(props) {
       </Box>
       <Divider />
       <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
-        <SummaryReturnBarClosed summaryData=
+        <SummaryReturnBarClosed2 summaryData=
           {summaryData?.summaryList?.filter(summary => summary.positionStatus.toUpperCase() === "CLOSED")
             .sort((a, b) => a.pctReturn - b.pctReturn)
             .map(summary => {
@@ -52,16 +52,61 @@ export default function Summray(props) {
       </Box>
       <Divider />
       <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
-        <SymbolContributionOpen summaryList=
-             {summaryData?.summaryList?.filter(summary => summary.positionStatus.toUpperCase() === "OPEN")
-              .sort((a, b) => b.totalCurrValue - a.totalCurrValue)
-              // .map(summary => { return { ...summary, totalBuyValue: roundNumber(summary.unrealizedProfit) } })
-              //summary.unsoldQty * summary.buyPrice
-            }
+        <SymbolContributionOpen3 summaryList=
+          {summaryData?.summaryList?.filter(summary => summary.positionStatus.toUpperCase() === "OPEN")
+            .sort((a, b) => b.totalCurrValue - a.totalCurrValue)
+            // .map(summary => { return { ...summary, totalBuyValue: roundNumber(summary.unrealizedProfit) } })
+            //summary.unsoldQty * summary.buyPrice
+          }
         />
       </Box>
       <Divider />
       <Box sx={{ marginTop: 2 }}>
+        <Grid container spacing={1}>
+          <Grid item xs={4}>
+            <Box sx={{ marginBottom: 2, marginLeft: 2, background: '#d8e9f0', height: '100%' }}>
+              {summaryData &&
+                <SummaryKpiReturn51
+                  stockData={[{ ...summaryData?.transactionKPI?.stockOpen, type: "Open" }, { ...summaryData?.transactionKPI?.stockClosed, type: "Closed" }]}
+                />
+              }
+            </Box>
+          </Grid>
+          <Grid item xs={4}>
+            <Box sx={{ marginBottom: 2, marginLeft: 2, background: '#e4e6ef', height: '100%' }}>
+              <SummaryKpiReturnNumTimes52
+                stockData={[{ ...summaryData?.transactionKPI?.stockOpen, type: "Open" }, { ...summaryData?.transactionKPI?.stockClosed, type: "Closed" }]}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={4}>
+            <Box sx={{ marginLeft: 2, background: '#8ed1fc', height: '100%' }}>
+              <SummaryKpiTable53
+                kpiData=
+                {
+                  [
+                    {
+                      name: "Open",
+                      detail: [
+                        { type: 'Best', name: summaryData?.transactionKPI?.stockOpen.bestStock?.symbol, gain: summaryData?.transactionKPI?.stockOpen.bestStock?.unrealizedProfitPct },
+                        { type: 'worst', name: summaryData?.transactionKPI?.stockOpen.worstStock?.symbol, gain: summaryData?.transactionKPI?.stockOpen.worstStock?.unrealizedProfitPct }
+                      ]
+                    },
+                    {
+                      name: "Closed",
+                      detail: [
+                        { type: 'Best', name: summaryData?.transactionKPI?.stockClosed.bestStock?.symbol, gain: roundNumber(summaryData?.transactionKPI?.stockClosed.bestStock?.pctReturn) },
+                        { type: 'worst', name: summaryData?.transactionKPI?.stockClosed.worstStock?.symbol, gain: roundNumber(summaryData?.transactionKPI?.stockClosed.worstStock?.pctReturn) }
+                      ]
+                    }
+                  ]
+                }
+              />
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+      {/* <Box sx={{ marginTop: 2 }}>
         <Grid container spacing={1}>
           <Grid item xs={4}>
             <SummarySymbolContributionBar summaryList=
@@ -116,7 +161,7 @@ export default function Summray(props) {
             </Box>
           </Grid>
         </Grid>
-      </Box>
+      </Box> */}
       <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
         <SummaryAreaChart summaryList={
           summaryData?.summaryList

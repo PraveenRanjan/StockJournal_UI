@@ -25,7 +25,7 @@ const renderCustomizedLabelClosed = (props) => {
   />;
 };
 
-export default function SummaryReturnBarClosed(props) {
+export default function SummaryReturnBarClosed2(props) {
   const { summaryData } = props;
 
 
@@ -44,9 +44,9 @@ export default function SummaryReturnBarClosed(props) {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="symbol" angle={-90} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
-        <YAxis type="number" unit="%" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
-        <YAxis type="number" yAxisId="profit" orientation="left" tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
-        <YAxis type="number" yAxisId="sellValue" orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <YAxis type="number" angle={-70} unit="%" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <YAxis type="number" angle={-70} yAxisId="profit" orientation="left" tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+        <YAxis type="number" angle={70} yAxisId="sellValue" orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px", fontSize: 'small', fontWeight: 'bold' }} />
         <ReferenceLine y={0} stroke="#000" />

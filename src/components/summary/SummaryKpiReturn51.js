@@ -12,7 +12,7 @@ import {
     Rectangle, LabelList,
 } from "recharts";
 
-export default function SummaryKpiReturn(props) {
+export default function SummaryKpiReturn51(props) {
     const { stockData } = props;
     console.log('stockData--> ', stockData);
 
