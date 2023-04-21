@@ -61,6 +61,12 @@ export default function Summray(props) {
         />
       </Box>
       <Divider />
+      <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
+        <SummarySymbolContributionBarClosed summaryList=
+                {summaryData?.summaryList?.filter(summary => summary.positionStatus.toUpperCase() === "CLOSED").sort((a, b) => b.sellValue - a.sellValue)}
+              />
+      </Box>
+      <Divider />      
       <Box sx={{ marginTop: 2 }}>
         <Grid container spacing={1}>
           <Grid item xs={4}>

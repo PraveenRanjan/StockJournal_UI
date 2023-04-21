@@ -90,8 +90,7 @@ export default function SummarySymbolContributionBarClosed(props) {
       </ComposedChart> */}
       {/* <ResponsiveContainer width="50%" height="50%"> */}
         <LineChart
-          width={660}
-          height={350}
+          width={1450} height={400}
           data={summaryList}
           margin={{
             top: 10,
@@ -114,8 +113,7 @@ export default function SummarySymbolContributionBarClosed(props) {
         {/* </ResponsiveContainer> */}
 
         <AreaChart
-            width={640}
-            height={200}
+            width={1450} height={400}
             data={summaryList}
             syncId="anyId"
             margin={{
@@ -132,8 +130,7 @@ export default function SummarySymbolContributionBarClosed(props) {
             <Area type="monotone" dataKey="sellValue" stroke="#8884d8" fill="#8884d8" />
           </AreaChart>
           <AreaChart
-            width={640}
-            height={200}
+            width={1450} height={400}
             data={summaryList}
             syncId="anyId"
             margin={{
@@ -144,7 +141,7 @@ export default function SummarySymbolContributionBarClosed(props) {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="symbol" angle={90} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+            <XAxis dataKey="symbol" angle={90} interval={1} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
             <YAxis angle={-70} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
             <Tooltip />
             {/* <defs>
