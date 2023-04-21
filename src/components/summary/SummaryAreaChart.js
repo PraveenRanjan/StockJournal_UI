@@ -16,7 +16,7 @@ import {
   Area,
   ReferenceLine,
 } from "recharts";
-import { formatNumber, roundNumber } from '../util'
+import { formatNumber, roundNumber } from '../../util'
 
 function CustomizedLabel(props) {
   const { x, y, fill, value } = props;
@@ -46,7 +46,7 @@ function RetPercentLabel(props) {
 
 export default function SummaryAreaChart(props) {
   const { summaryList } = props;
-  console.log('summaryList = ', summaryList);
+  // console.log('summaryList = ', summaryList);
 
   return (
     <>

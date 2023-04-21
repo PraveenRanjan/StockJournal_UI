@@ -2,12 +2,14 @@ import react, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { Divider } from '@mui/material';
-import { getSummaryData } from '../api';
-import { roundNumber, formatNumber } from '../util'
+import { getSummaryData } from '../../api';
+import { roundNumber, formatNumber } from '../../util'
 import CollapsibleTable from './CollapsibleTable';
-import SummaryReturnBar from './SummaryReturnBar';
+import SummaryReturnBarOpen from './SummaryReturnBarOpen';
+import SummaryReturnBarClosed from './SummaryReturnBarClosed';
 import SummaryKpiReturn from './SummaryKpiReturn';
 import SummarySymbolContributionBar from './SummarySymbolContributionBar';
+import SymbolContributionOpen from './SymbolContributionOpen';
 import SummarySymbolContributionBarClosed from './SummarySymbolContributionBarClosed';
 import SummaryKpiTable from './SummaryKpiTable';
 import SummaryAreaChart from './SummaryAreaChart';
@@ -27,20 +29,35 @@ export default function Summray(props) {
   return (
     <>
       <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
-        <SummaryReturnBar summaryData=
-          {summaryData?.summaryList
+        <SummaryReturnBarOpen summaryData=
+          {summaryData?.summaryList?.filter(summary => summary.positionStatus.toUpperCase() === "OPEN")
             .sort((a, b) => a.unrealizedProfitPct - b.unrealizedProfitPct)
+            .map(summary => {
+              return { ...summary, unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct) }
+            }
+            )
+          }
+        />
+      </Box>
+      <Divider />
+      <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
+        <SummaryReturnBarClosed summaryData=
+          {summaryData?.summaryList?.filter(summary => summary.positionStatus.toUpperCase() === "CLOSED")
             .sort((a, b) => a.pctReturn - b.pctReturn)
             .map(summary => {
-              if (summary.unrealizedProfitPct == 99999999.0) {
-                return { ...summary, unrealizedProfitPct: "", pctReturn: roundNumber(summary.pctReturn) }
-              } else if (summary.pctReturn == 99999999.0) {
-                return { ...summary, pctReturn: "", unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct) }
-              } else {
-                return { ...summary, unrealizedProfitPct: roundNumber(summary.unrealizedProfitPct), pctReturn: roundNumber(summary.pctReturn) }
-              }
+              return { ...summary, pctReturn: roundNumber(summary.pctReturn) }
             })
           }
+        />
+      </Box>
+      <Divider />
+      <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
+        <SymbolContributionOpen summaryList=
+             {summaryData?.summaryList?.filter(summary => summary.positionStatus.toUpperCase() === "OPEN")
+              .sort((a, b) => b.totalCurrValue - a.totalCurrValue)
+              // .map(summary => { return { ...summary, totalBuyValue: roundNumber(summary.unrealizedProfit) } })
+              //summary.unsoldQty * summary.buyPrice
+            }
         />
       </Box>
       <Divider />

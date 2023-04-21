@@ -13,7 +13,7 @@ import {
   Label,
   ReferenceLine,
 } from "recharts";
-import { roundNumber, formatNumber } from '../util'
+import { roundNumber, formatNumber } from '../../util';
 
 function CustomizedLabel(props) {
   // const { content, ...rest } = props;
@@ -59,7 +59,6 @@ function PercentLabel(props) {
 export default function SummarySymbolContributionBar(props) {
   const { summaryList } = props;
   const [total, setTotal] = useState(0);
-  console.log('summaryList = ', summaryList );
 
   useEffect(() => {
     const totalValue = summaryList?.reduce((result, entry) => (result + entry.totalCurrValue), 0);

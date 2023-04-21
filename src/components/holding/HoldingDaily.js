@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import HoldingBarWeek from './HoldingBarWeek';
-import { getWeeklyHoldingData } from '../api';
+import HoldingBarDaily from './HoldingBarDaily';
+import { getHoldingData } from '../../api';
 
 export default function HoldingDaily(props) {
   const { userId } = props;
@@ -8,12 +8,12 @@ export default function HoldingDaily(props) {
 
 
   useEffect(() => {
-    getWeeklyHoldingData(userId).then(data => {
+    getHoldingData(userId).then(data => {
       console.log('Holding data--> ', data);
       setHoldingData(data);
     });
   }, [userId]);
   return (
-    <HoldingBarWeek holdingData={holdingData} />
+    <HoldingBarDaily holdingData={holdingData} />
   );
 }

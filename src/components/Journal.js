@@ -5,13 +5,11 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import Transactions from './Transactions';
 import FileUpload from './FileUpload';
-import Summray from './Summary';
-import HoldingWrapper from './HoldingWrapper';
+import Summray from './summary/Summary';
+import HoldingWrapper from './holding/HoldingWrapper';
 import { Chip, Alert, AlertTitle, FormControl, InputLabel, Select } from '@mui/material';
 
 

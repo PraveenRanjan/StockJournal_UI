@@ -16,7 +16,7 @@ import {
   Area,
   ReferenceLine,
 } from "recharts";
-import { formatNumber, roundNumber } from '../util'
+import { formatNumber, roundNumber } from '../../util'
 
 function CustomizedLabel(props) {
   const { x, y, fill, value } = props;
@@ -62,7 +62,7 @@ function RetPercentLabel(props) {
 
 export default function SummarySymbolContributionBarClosed(props) {
   const { summaryList } = props;
-  console.log('summaryList = ', summaryList);
+  // console.log('summaryList = ', summaryList);
 
   return (
     <div>
@@ -101,7 +101,7 @@ export default function SummarySymbolContributionBarClosed(props) {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="symbol" angle={90} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+          <XAxis dataKey="symbol" angle={90} interval={1} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
           <YAxis yAxisId="left" angle={-25} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
           <YAxis yAxisId="right" angle={80} orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
           <Tooltip />
@@ -126,7 +126,7 @@ export default function SummarySymbolContributionBarClosed(props) {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="symbol" angle={90} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+            <XAxis dataKey="symbol" angle={90} interval={1} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
             <YAxis angle={-70} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
             <Tooltip />
             <Area type="monotone" dataKey="sellValue" stroke="#8884d8" fill="#8884d8" />

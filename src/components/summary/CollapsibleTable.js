@@ -18,7 +18,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { formatNumber } from '../util';
+import { formatNumber } from '../../util';
 
 const DEFAULT_ORDER = 'asc';
 const DEFAULT_ORDER_BY = 'symbol';
