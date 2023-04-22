@@ -22,6 +22,7 @@ import { formatNumber } from '../../util';
 
 const DEFAULT_ORDER = 'asc';
 const DEFAULT_ORDER_BY = 'symbol';
+const POSITION_STATUS_CLOSED = 'Closed';
 
 
 
@@ -89,8 +90,9 @@ function Row(props) {
 
         <TableCell align="right">{row.unsoldQty}</TableCell>
         <TableCell align="right">{formatNumber(row.lastTradingPrice)}</TableCell>
-        <TableCell align="right">{formatNumber(row.profit)}</TableCell>
-        <TableCell align="right">{formatNumber(row.pctReturn)}</TableCell>
+        <TableCell align="right">{row.positionStatus === POSITION_STATUS_CLOSED ? formatNumber(row.profit) : formatNumber(row.unrealizedProfit)}</TableCell>
+        <TableCell align="right">{row.positionStatus === POSITION_STATUS_CLOSED ? formatNumber(row.pctReturn) : formatNumber(row.unrealizedProfitPct
+        )}</TableCell>
         <TableCell align="right">{formatNumber(row.buyValue)}</TableCell>
         <TableCell align="right">{formatNumber(row.sellValue)}</TableCell>
         <TableCell align="right">{row.buyQuantity}</TableCell>
