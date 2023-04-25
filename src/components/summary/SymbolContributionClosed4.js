@@ -55,17 +55,11 @@ const renderCustomizedLabelPct = (props) => {
   return <Label {...rest} fontSize='x-small' fontWeight="Bold"  />;
 };
 
-export default function SymbolContributionOpen3(props) {
+export default function SymbolContributionClosed4(props) {
   const { summaryList } = props;
-  const [total, setTotal] = useState(0);
-  console.log('summaryList in open contribution = ', summaryList );
+  console.log('summaryList in closed contribution = ', summaryList );
 
-  useEffect(() => {
-    const totalValue = summaryList?.reduce((result, entry) => (result + entry.totalCurrValue), 0);
-    if (totalValue) {
-      setTotal(roundNumber(totalValue));
-    }
-  }, [summaryList]);
+
 
   return (
     <div>
@@ -83,21 +77,20 @@ export default function SymbolContributionOpen3(props) {
       >
         <CartesianGrid stroke="#f5f5f5" />
         <YAxis type="number" angle={-45} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} orientation="left" />
-        <XAxis dataKey="symbol" angle={-15} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <XAxis dataKey="symbol" angle={-90} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <XAxis dataKey="symbol" type="category" xAxisId="profit" hide />
         <YAxis type="number" angle={75} yAxisId="%profit" orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
 
         <ReferenceLine x={0} stroke="#e65100" />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px", fontSize: 'small', fontWeight: 'bold' }} />
-        <Line yAxisId="%profit" type="monotone" dataKey="unrealizedProfitPct" name="%Profit" stroke="#00796b" />
-        <Bar dataKey="totalCurrValue" barSize={0} fill="black" name={`Total Value: ${roundNumber(total)}`} />
+        <Line yAxisId="%profit" type="monotone" dataKey="pctReturn" name="%Profit" stroke="#00796b" />
 
-        <Bar dataKey="totalCurrValue" barSize={12} fill="#b098ea" name='Current Value' 
+        <Bar dataKey="sellValue" barSize={12} fill="#b098ea" name='Sell Value' 
         // label={<CustomizedLabel />} 
         >
             <LabelList
-            dataKey="totalCurrValue"
+            dataKey="sellValue"
             // position="bottom"
             angle="-90"
             fill="blue"
@@ -106,17 +99,17 @@ export default function SymbolContributionOpen3(props) {
             content={renderCustomizedLabel}
           />
             <LabelList
-            dataKey="unrealizedProfitPct"
-            position="right"
-            angle="-90"
+            dataKey="pctReturn"
+            position="insideStart"
+            // angle="45"
             fill="#00796b"
             fontSize='x-small'
             fontWeight="Bold"
             content={renderCustomizedLabelPct}
           />
           <LabelList
-            dataKey="unrealizedProfit"
-            position="left"
+            dataKey="profit"
+            position="top"
             angle="-90"
             fill="#0693e3"
             fontSize='x-small'
@@ -125,10 +118,9 @@ export default function SymbolContributionOpen3(props) {
           />
           </Bar>
 
-        <Bar dataKey="unrealizedProfit" barSize={8} xAxisId="profit" fill="#0693e3" name="Profit"
+        <Bar dataKey="profit" barSize={8} xAxisId="profit" fill="#0693e3" name="Profit"
          >
         </Bar>
-        <Line dataKey="totalCurrValue" stroke="#ff7300" name="%Contribution" label={<PercentLabel total={total} />} />
       </ComposedChart>
     </div>
   );

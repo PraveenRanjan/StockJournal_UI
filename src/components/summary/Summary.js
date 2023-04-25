@@ -9,6 +9,7 @@ import SummaryReturnBarOpen1 from './SummaryReturnBarOpen1';
 import SummaryReturnBarClosed2 from './SummaryReturnBarClosed2';
 import SummaryKpiReturn51 from './SummaryKpiReturn51';
 import SummarySymbolContributionBar from './SummarySymbolContributionBar';
+import SymbolContributionClosed4 from './SymbolContributionClosed4';
 import SymbolContributionOpen3 from './SymbolContributionOpen3';
 import SummarySymbolContributionBarClosed from './SummarySymbolContributionBarClosed';
 import SummaryKpiTable53 from './SummaryKpiTable53';
@@ -55,6 +56,16 @@ export default function Summray(props) {
         <SymbolContributionOpen3 summaryList=
           {summaryData?.summaryList?.filter(summary => summary.positionStatus.toUpperCase() === "OPEN")
             .sort((a, b) => b.totalCurrValue - a.totalCurrValue)
+            // .map(summary => { return { ...summary, totalBuyValue: roundNumber(summary.unrealizedProfit) } })
+            //summary.unsoldQty * summary.buyPrice
+          }
+        />
+      </Box>
+      <Divider />
+      <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
+        <SymbolContributionClosed4 summaryList=
+          {summaryData?.summaryList?.filter(summary => summary.positionStatus.toUpperCase() === "CLOSED")
+            .sort((a, b) => b.sellValue - a.sellValue)
             // .map(summary => { return { ...summary, totalBuyValue: roundNumber(summary.unrealizedProfit) } })
             //summary.unsoldQty * summary.buyPrice
           }
