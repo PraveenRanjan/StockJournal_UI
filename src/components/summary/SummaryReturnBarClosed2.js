@@ -30,7 +30,7 @@ export default function SummaryReturnBarClosed2(props) {
 
 
   return (
-    <div>
+    <div> Closed Positions:
       <ComposedChart
         width={1450} height={400}
         data={summaryData}

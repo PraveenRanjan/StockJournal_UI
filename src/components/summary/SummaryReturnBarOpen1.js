@@ -32,7 +32,7 @@ export default function SummaryReturnBarOpen1(props) {
 
 
   return (
-    <div>
+    <div> Open Positions:
       <ComposedChart
         width={1450} height={400}
         data={summaryData}

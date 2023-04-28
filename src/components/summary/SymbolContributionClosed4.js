@@ -59,10 +59,19 @@ export default function SymbolContributionClosed4(props) {
   const { summaryList } = props;
   console.log('summaryList in closed contribution = ', summaryList );
 
+  const [totalProfit, setTotalProfit] = useState(0);
+
+
+  useEffect(() => {
+    const totalProfit = summaryList?.reduce((result, entry) => (result + entry.profit), 0);
+    if (totalProfit) {
+      setTotalProfit(roundNumber(totalProfit));
+    }
+  }, [summaryList]);
 
 
   return (
-    <div>
+    <div> Closed Positions:
       <ComposedChart
         // layout="vertical"
         width={1450} height={450}
@@ -84,6 +93,7 @@ export default function SymbolContributionClosed4(props) {
         <ReferenceLine x={0} stroke="#e65100" />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px", fontSize: 'small', fontWeight: 'bold' }} />
+        <Bar dataKey="profit" barSize={0} fill="#3f51b5" name={`Total Profit: ${totalProfit}`} legendType="star"/>
         <Line yAxisId="%profit" type="monotone" dataKey="pctReturn" name="%Profit" stroke="#00796b" />
 
         <Bar dataKey="sellValue" barSize={12} fill="#b098ea" name='Sell Value' 

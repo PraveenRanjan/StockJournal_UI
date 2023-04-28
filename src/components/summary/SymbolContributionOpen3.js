@@ -58,17 +58,20 @@ const renderCustomizedLabelPct = (props) => {
 export default function SymbolContributionOpen3(props) {
   const { summaryList } = props;
   const [total, setTotal] = useState(0);
+  const [totalProfit, setTotalProfit] = useState(0);
   console.log('summaryList in open contribution = ', summaryList );
 
   useEffect(() => {
     const totalValue = summaryList?.reduce((result, entry) => (result + entry.totalCurrValue), 0);
+    const totalProfit = summaryList?.reduce((result, entry) => (result + entry.unrealizedProfit), 0);
     if (totalValue) {
       setTotal(roundNumber(totalValue));
+      setTotalProfit(roundNumber(totalProfit));
     }
   }, [summaryList]);
 
   return (
-    <div>
+    <div> Open Positions:
       <ComposedChart
         // layout="vertical"
         width={1450} height={450}
@@ -83,15 +86,16 @@ export default function SymbolContributionOpen3(props) {
       >
         <CartesianGrid stroke="#f5f5f5" />
         <YAxis type="number" angle={-45} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} orientation="left" />
-        <XAxis dataKey="symbol" angle={-15} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <XAxis dataKey="symbol" angle={-45} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <XAxis dataKey="symbol" type="category" xAxisId="profit" hide />
         <YAxis type="number" angle={75} yAxisId="%profit" orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
 
         <ReferenceLine x={0} stroke="#e65100" />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px", fontSize: 'small', fontWeight: 'bold' }} />
+        <Bar dataKey="totalCurrValue" barSize={0} fill="black" name={`Total Value: ${total}`} />
+        <Bar dataKey="unrealizedProfit" barSize={0} fill="#3f51b5" name={`Total Profit: ${totalProfit}`} legendType="star"/>
         <Line yAxisId="%profit" type="monotone" dataKey="unrealizedProfitPct" name="%Profit" stroke="#00796b" />
-        <Bar dataKey="totalCurrValue" barSize={0} fill="black" name={`Total Value: ${roundNumber(total)}`} />
 
         <Bar dataKey="totalCurrValue" barSize={12} fill="#b098ea" name='Current Value' 
         // label={<CustomizedLabel />} 

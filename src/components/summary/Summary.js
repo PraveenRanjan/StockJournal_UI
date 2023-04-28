@@ -8,7 +8,7 @@ import CollapsibleTable from './CollapsibleTable';
 import SummaryReturnBarOpen1 from './SummaryReturnBarOpen1';
 import SummaryReturnBarClosed2 from './SummaryReturnBarClosed2';
 import SummaryKpiReturn51 from './SummaryKpiReturn51';
-import SummarySymbolContributionBar from './SummarySymbolContributionBar';
+
 import SymbolContributionClosed4 from './SymbolContributionClosed4';
 import SymbolContributionOpen3 from './SymbolContributionOpen3';
 import SummarySymbolContributionBarClosed from './SummarySymbolContributionBarClosed';
