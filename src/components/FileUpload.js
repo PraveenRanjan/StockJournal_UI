@@ -1,4 +1,5 @@
 import react, { useState } from 'react';
+import dayjs from 'dayjs';
 import { DropzoneArea } from "mui-file-dropzone";
 import { uploadFile } from "../api";
 import { Grid, TextField } from '@mui/material';
@@ -6,16 +7,21 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { HOLDINGS, TRANSACTIONS } from '../Constants';
 
-const HOLDINGS = 'holdings';
+
 
 export default function FileUpload(props) {
   const { userId } = props;
-  const [type, setType] = useState('transactions');
+  const [type, setType] = useState(TRANSACTIONS);
   const [cash, setCash] = useState();
   const [newFund, setNewFund] = useState();
   const [showCash, setShowCash] = useState(false);
   const [file, setFile] = useState();
+  const [date, setDate] = useState(dayjs());
 
   const handleFileChange = (files) => {
     console.log('files--> ', files);
@@ -39,8 +45,14 @@ export default function FileUpload(props) {
     setNewFund(event.target.value);
   }
   const handleClick = (event) => {
-    uploadFile(userId, type, file, cash, newFund);
+
+    uploadFile(userId, type, file, dayjs(date).format('YYYY-MM-DD'), cash, newFund);
   }
+
+  const handleDate = (input) => {
+    setDate(input);
+  }
+
   return (
     <>
 
@@ -50,15 +62,18 @@ export default function FileUpload(props) {
         </Grid>
         <Grid item xs={4}>
           <FormControl>
-            {/* <FormLabel id="demo-controlled-radio-buttons-group">Gender</FormLabel> */}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker value={date} onChange={handleDate}/>
+            </LocalizationProvider>
+            
             <RadioGroup
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
               value={type}
               onChange={handleChange}
             >
-              <FormControlLabel value="transactions" control={<Radio />} label="Transactions" />
-              <FormControlLabel value="holdings" control={<Radio />} label="Holdings" />
+              <FormControlLabel value={TRANSACTIONS} control={<Radio />} label="Transactions" />
+              <FormControlLabel value={HOLDINGS} control={<Radio />} label="Holdings" />
             </RadioGroup>
             {/* <FormLabel id="demo-cash"></FormLabel> */}
             {showCash &&

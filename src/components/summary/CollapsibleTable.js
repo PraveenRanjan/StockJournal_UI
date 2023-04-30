@@ -15,6 +15,8 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
+import LockIcon from '@mui/icons-material/Lock';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -82,6 +84,11 @@ function Row(props) {
             onClick={() => setOpen(!open)}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+          <IconButton
+            aria-label="open_close"
+            size="small">
+            {row.positionStatus === POSITION_STATUS_CLOSED ? <LockIcon /> : <LockOpenIcon />}
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row" >
