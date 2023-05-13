@@ -105,7 +105,47 @@ export const getWeeklyHoldingData = async (userId) => {
     } catch (e) {
         console.error('Error getting holding data: ', e)
     }
-
 }
 
+export const updateSummaryLTP = async (userId) => {
+    try {
+        const updateSummaryLTP = await axios({
+            url: '/journal/transactions/summary/LTP/update',
+            method: 'get',
+            headers: { 'userId': userId }
+        })
+        console.log("updated")
+        return "Updated";
+    } catch (e) {
+        console.error('Error updating LTP for transaction summary data ', e)
+    }
+}
 
+export const resetSummaryData = async (userId) => {
+    try {
+        const resetSummaryData = await axios({
+            url: '/journal/transactions/summary/resetLatestData',
+            method: 'get',
+            headers: { 'userId': userId }
+        })
+        console.log("updated")
+        return "Data reset";
+    } catch (e) {
+        console.error('Error resetting transaction summary data to previous day ', e)
+    }
+}
+
+export const updateStopLossData = async (userId, transaction) => {
+    console.log('transaction - ', transaction);
+    try {
+        const upload = await axios({
+            url: '/journal/transactions/summary/update/Stoploss',
+            method: 'post',
+            headers: { 'userId': userId },
+            data: transaction
+        })
+
+    } catch (e) {
+        console.error('updateStopLossData: ', e)
+    }
+}

@@ -10,6 +10,8 @@ import Transactions from './Transactions';
 import FileUpload from './FileUpload';
 import Summray from './summary/Summary';
 import HoldingWrapper from './holding/HoldingWrapper';
+import SummaryTable from './summaryTable/SummaryTable';
+import UtilWrapper from './utilities/UtilWrapper';
 import { Chip, Alert, AlertTitle, FormControl, InputLabel, Select } from '@mui/material';
 
 
@@ -102,8 +104,10 @@ export default function Journal() {
             <Tabs value={value} onChange={handleTabChange} >
               <Tab label="Transactions" {...a11yProps(0)} />
               <Tab label="Summary" {...a11yProps(1)} />
-              <Tab label="File upload" {...a11yProps(2)} />
-              <Tab label="Holding" {...a11yProps(3)} />
+              <Tab label="Summary Table" {...a11yProps(2)} />
+              <Tab label="File upload" {...a11yProps(3)} />
+              <Tab label="Holding" {...a11yProps(4)} />
+              <Tab label="Utilities" {...a11yProps(5)} />
             </Tabs>
 
           </Box>
@@ -114,10 +118,16 @@ export default function Journal() {
             <Summray userId={userId} />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <FileUpload userId={userId} />
+            <SummaryTable userId={userId} />
           </TabPanel>
           <TabPanel value={value} index={3}>
+            <FileUpload userId={userId} />
+          </TabPanel>
+          <TabPanel value={value} index={4}>
             <HoldingWrapper userId={userId} />
+          </TabPanel>
+          <TabPanel value={value} index={5}>
+            <UtilWrapper userId={userId} />
           </TabPanel>
         </>
         :

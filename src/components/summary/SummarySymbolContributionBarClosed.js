@@ -90,7 +90,7 @@ export default function SummarySymbolContributionBarClosed(props) {
       </ComposedChart> */}
       {/* <ResponsiveContainer width="50%" height="50%"> */}
         <LineChart
-          width={1450} height={400}
+          width={1450} height={300}
           data={summaryList}
           margin={{
             top: 10,
@@ -113,7 +113,7 @@ export default function SummarySymbolContributionBarClosed(props) {
         {/* </ResponsiveContainer> */}
 
         <AreaChart
-            width={1450} height={400}
+            width={1450} height={350}
             data={summaryList}
             syncId="anyId"
             margin={{
@@ -130,7 +130,7 @@ export default function SummarySymbolContributionBarClosed(props) {
             <Area type="monotone" dataKey="sellValue" stroke="#8884d8" fill="#8884d8" />
           </AreaChart>
           <AreaChart
-            width={1450} height={400}
+            width={1450} height={350}
             data={summaryList}
             syncId="anyId"
             margin={{
@@ -153,6 +153,23 @@ export default function SummarySymbolContributionBarClosed(props) {
           <Area type="monotone" dataKey="pctReturn" fill="#82ca9d" stroke="#82ca9d" />
             {/* <Area type="monotone" dataKey="pctReturn" stroke="#000" fill="url(#splitColor)"  />  */}
           {/* fill="#82ca9d"  stroke="#82ca9d"  */}
+          </AreaChart>
+          <AreaChart
+            width={1450} height={300}
+            data={summaryList}
+            syncId="anyId"
+            margin={{
+              top: 10,
+              right: 30,
+              left: 0,
+              bottom: 0,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="symbol" angle={90} interval={1} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+            <YAxis angle={-70} tick={{ fontSize: 'x-small', fontWeight: 'bold' }}/>
+            <Tooltip />
+          <Area type="monotone" dataKey="profit" fill="#0693e3" stroke="#0693e3" />
           </AreaChart>
     </div>
   );

@@ -86,7 +86,7 @@ export default function SymbolContributionClosed4(props) {
       >
         <CartesianGrid stroke="#f5f5f5" />
         <YAxis type="number" angle={-45} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} orientation="left" />
-        <XAxis dataKey="symbol" angle={-90} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <XAxis dataKey="symbol" angle={-90} interval={1} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <XAxis dataKey="symbol" type="category" xAxisId="profit" hide />
         <YAxis type="number" angle={75} yAxisId="%profit" orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
 
