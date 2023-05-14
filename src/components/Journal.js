@@ -71,73 +71,73 @@ export default function Journal() {
   }
 
 
-  return (
-    <>
+return (
+  <>
 
-      <AppBar position="static" color='transparent'>
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Trading Journal
-          </Typography>
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-              <InputLabel id="demo-select-small">User</InputLabel>
-              <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                value={userId}
-                label="User"
-                onChange={handleUserSelect}
-              >
-                <MenuItem value={'Test'}>Test</MenuItem>
-                <MenuItem value={'ar'}>AR</MenuItem>
-                <MenuItem value={'pr'}>PR</MenuItem>
-              </Select>
-            </FormControl>
-        
-        </Toolbar>
-      </AppBar>
+    <AppBar position="static" color='transparent'>
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Trading Journal
+        </Typography>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <InputLabel id="demo-select-small">User</InputLabel>
+          <Select
+            labelId="demo-select-small"
+            id="demo-select-small"
+            value={userId}
+            label="User"
+            onChange={handleUserSelect}
+          >
+            <MenuItem value={'Test'}>Test</MenuItem>
+            <MenuItem value={'ar'}>AR</MenuItem>
+            <MenuItem value={'pr'}>PR</MenuItem>
+          </Select>
+        </FormControl>
 
-      {auth ?
-        <>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      </Toolbar>
+    </AppBar>
 
-            <Tabs value={value} onChange={handleTabChange} >
-              <Tab label="Transactions" {...a11yProps(0)} />
-              <Tab label="Summary" {...a11yProps(1)} />
-              <Tab label="Summary Table" {...a11yProps(2)} />
-              <Tab label="File upload" {...a11yProps(3)} />
-              <Tab label="Holding" {...a11yProps(4)} />
-              <Tab label="Utilities" {...a11yProps(5)} />
-            </Tabs>
+    {auth ?
+      <>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 
-          </Box>
-          <TabPanel value={value} index={0}>
-            <Transactions userId={userId} />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <Summray userId={userId} />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            <SummaryTable userId={userId} />
-          </TabPanel>
-          <TabPanel value={value} index={3}>
-            <FileUpload userId={userId} />
-          </TabPanel>
-          <TabPanel value={value} index={4}>
-            <HoldingWrapper userId={userId} />
-          </TabPanel>
-          <TabPanel value={value} index={5}>
-            <UtilWrapper userId={userId} />
-          </TabPanel>
-        </>
-        :
-        <Alert severity="error">
-          <AlertTitle>Error</AlertTitle>
-          User not select — <strong>Please select User!</strong>
-        </Alert>
-      }
+          <Tabs value={value} onChange={handleTabChange} >
+            <Tab label="Transactions" {...a11yProps(0)} />
+            <Tab label="Summary" {...a11yProps(1)} />
+            <Tab label="Summary Table" {...a11yProps(2)} />
+            <Tab label="File upload" {...a11yProps(3)} />
+            <Tab label="Holding" {...a11yProps(4)} />
+            <Tab label="Utilities" {...a11yProps(5)} />
+          </Tabs>
+
+        </Box>
+        <TabPanel value={value} index={0}>
+          <Transactions userId={userId} />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <Summray userId={userId} />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <SummaryTable userId={userId} />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <FileUpload userId={userId} />
+        </TabPanel>
+        <TabPanel value={value} index={4}>
+          <HoldingWrapper userId={userId} />
+        </TabPanel>
+        <TabPanel value={value} index={5}>
+          <UtilWrapper userId={userId} />
+        </TabPanel>
+      </>
+      :
+      <Alert severity="error">
+        <AlertTitle>Error</AlertTitle>
+        User not select — <strong>Please select User!</strong>
+      </Alert>
+    }
 
 
-    </>
-  )
+  </>
+)
 }

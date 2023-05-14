@@ -7,7 +7,7 @@ import TableRow from '@mui/material/TableRow';
 
 export default function SummaryKpiTable53(props) {
   const { kpiData } = props;
-
+  
   return (
     <Table >
       <TableHead>
@@ -20,20 +20,20 @@ export default function SummaryKpiTable53(props) {
       </TableHead>
       <TableBody>
         {kpiData.map(item => (
-          <Fragment>
-            <TableRow>
+          <>
+            <TableRow key={item.name}>
               <TableCell rowSpan={item.detail.length + 1}>
                 {item.name}
               </TableCell>
             </TableRow>
             {item.detail.map(detail => (
-              <TableRow>
+              <TableRow key={`${detail.type}_${detail.name}`}>
                 <TableCell>{detail.type}</TableCell>
                 <TableCell>{detail.name}</TableCell>
                 <TableCell>{detail.gain}</TableCell>
               </TableRow>
             ))}
-          </Fragment>
+          </>
         ))}
       </TableBody>
     </Table>

@@ -1,6 +1,6 @@
 import react, { useCallback, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { TextField, Toolbar } from '@mui/material';
+import { Divider, TextField, Toolbar } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
@@ -17,13 +17,21 @@ import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import LockIcon from '@mui/icons-material/Lock';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
+
+import TableFilter from '../common/TableFilter';
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { formatNumber } from '../../util';
+import { OPERATOR_EQUAL, OPERATOR_EQUAL_GRATER, OPERATOR_EQUAL_LESS } from '../Constants'
 
 const DEFAULT_ORDER = 'asc';
-const DEFAULT_ORDER_BY = 'symbol';
+const DEFAULT_ORDER_BY = 'positionStatus';
 const POSITION_STATUS_CLOSED = 'Closed';
 
 
@@ -37,6 +45,7 @@ const tableColumnNames = [
   { id: 'positionStatus', label: 'Status' }, { id: 'strategy', label: 'Strategy' }, { id: 'entryDate', label: 'Entry Date' }, { id: 'comments', label: 'Comments' },
   { id: 'action', label: 'Action' }
 ];
+
 
 
 function descendingComparator(a, b, orderBy) {
@@ -74,9 +83,12 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = useState(false);
 
+  const background = row.stopLossAlert ? '#ffd740' : '';
+
+
   return (
     <>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' }, background }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -91,7 +103,7 @@ function Row(props) {
             {row.positionStatus === POSITION_STATUS_CLOSED ? <LockIcon /> : <LockOpenIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row" >
+        <TableCell component="th" scope="row">
           {row.symbol}
         </TableCell>
 
@@ -162,6 +174,7 @@ export default function CollapsibleTable(props) {
   const [order, setOrder] = useState(DEFAULT_ORDER);
   const [orderBy, setOrderBy] = useState(DEFAULT_ORDER_BY);
   const [searchText, setSearchText] = useState('');
+  const [status, setStatus] = useState('');
 
 
   useEffect(() => {
@@ -169,7 +182,7 @@ export default function CollapsibleTable(props) {
   }, [tableData]);
 
   const handleRequestSort = useCallback(
-    (event, newOrderBy) => {
+    (newOrderBy) => {
       const isAsc = orderBy === newOrderBy && order === 'asc';
       const toggledOrder = isAsc ? 'desc' : 'asc';
       setOrder(toggledOrder);
@@ -189,7 +202,7 @@ export default function CollapsibleTable(props) {
   );
 
   const createSortHandler = (newOrderBy) => (event) => {
-    handleRequestSort(event, newOrderBy);
+    handleRequestSort(newOrderBy);
   };
 
   const handleSearchText = (event) => {
@@ -208,18 +221,63 @@ export default function CollapsibleTable(props) {
     setTableRows(tableData);
   }
 
+  const applyFilter = (filterObj, tableData=tableRows) => {
+
+    const filtredData = tableData?.filter(r => {
+      if (OPERATOR_EQUAL == filterObj.selectedOperator) {
+        console.log('r[filterObj.selectedColumn]--> ', r[filterObj.selectedColumn]);
+        return r[filterObj.selectedColumn] == filterObj.value;
+      } else if (OPERATOR_EQUAL_GRATER == filterObj.selectedOperator) {
+        console.log('r[filterObj.selectedColumn]--> ', r[filterObj.selectedColumn]);
+        return r[filterObj.selectedColumn] >= filterObj.value;
+      } else if (OPERATOR_EQUAL_LESS == filterObj.selectedOperator) {
+        console.log('r[filterObj.selectedColumn]--> ', r[filterObj.selectedColumn]);
+        return r[filterObj.selectedColumn] <= filterObj.value;
+      }
+    });
+    setTableRows(filtredData);
+  }
+
+  const handleStatusChange = (event) => {
+    setStatus(event.target.value);
+    if(event.target.value){
+      applyFilter({selectedColumn: 'positionStatus', selectedOperator: OPERATOR_EQUAL, value: event.target.value}, tableData);
+    } else {
+      clearSearch();
+    }
+    
+  }
+
   return (
     <Box sx={{ border: '1px solid grey' }}>
       <Toolbar>
-        <TextField placeholder='Search Symbol...' size='small' value={searchText} onChange={handleSearchText} />
-        <IconButton size="medium" aria-label="search" color="inherit">
-          <SearchIcon onClick={handleSearch} color="primary" />
-
+        <TextField placeholder='Search Symbol...' size='small' value={searchText} onChange={handleSearchText} onBlur={handleSearch} />
+        <IconButton size="medium" aria-label="search" color="inherit" onClick={handleSearch}>
+          <SearchIcon color="primary" />
         </IconButton>
-        <IconButton size="medium" aria-label="clear" color="inherit">
-          <ClearIcon color="action" onClick={clearSearch} />
-        </IconButton>
+       
+        <TableFilter filterOptions={tableColumnNames} applyFilter={applyFilter} />
+        <Divider />
 
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <InputLabel id="demo-simple-select-label">Status</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={status}
+            label="Status"
+            onChange={handleStatusChange}
+            size="small"
+          > 
+            <MenuItem value=''>All</MenuItem>     
+            <MenuItem value='Open'>Open</MenuItem>    
+            <MenuItem value='Closed'>Closed</MenuItem>      
+          </Select>
+        </FormControl>
+
+        <IconButton size="medium" aria-label="clear" color="inherit" onClick={clearSearch}>
+          <ClearIcon color="action" />
+        </IconButton>
       </Toolbar>
 
       <TableContainer component={Paper} sx={{ maxHeight: 600 }}>
@@ -229,7 +287,7 @@ export default function CollapsibleTable(props) {
             <TableRow>
               <TableCell />
               {tableColumnNames.map(col =>
-                <TableCell align="right" sortDirection={orderBy === col.id ? order : false}>
+                <TableCell key={col.id} align="right" sortDirection={orderBy === col.id ? order : false}>
                   <TableSortLabel
                     active={orderBy === col.id}
                     direction={orderBy === col.id ? order : 'asc'}

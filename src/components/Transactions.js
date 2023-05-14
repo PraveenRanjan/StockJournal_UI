@@ -87,7 +87,7 @@ export default function Transections(props) {
   );
   return (
     <div style={{ height: 600, width: '100%' }}>
-      <MaterialReactTable columns={columns} data={rows}
+      {rows && <MaterialReactTable columns={columns} data={rows}
       renderTopToolbarCustomActions={({ table }) => (
         <Box
           sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}
@@ -110,7 +110,9 @@ export default function Transections(props) {
           rowsPerPageOptions: [25, 50, 100],
           showFirstButton: true,
           showLastButton: true,
-        }} />;
+        }} 
+        />}
     </div>
+      
   );
 }

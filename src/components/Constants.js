@@ -1,0 +1,3 @@
+export const OPERATOR_EQUAL = "EQUAL";
+export const OPERATOR_EQUAL_GRATER = "EQUAL_AND_GRATER";
+export const OPERATOR_EQUAL_LESS = "EQUAL_AND_LESS";
