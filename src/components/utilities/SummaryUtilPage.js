@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { updateSummaryLTP, updateStopLossData, resetSummaryData } from "../../api";
+import { updateSummaryLTP, updateStopLossData, resetSummaryData, exportSummaryCsv } from "../../api";
 import { Divider, TextField, Stack, Typography, Button, Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 
@@ -27,9 +27,11 @@ export default function SummaryUtilPage(props) {
     const updateStopLoss = () => {
         console.log(userId, transaction);
         updateStopLossData(userId, transaction);
-
     }
 
+    const handleExportData = (type) => {
+        exportSummaryCsv(userId, type);
+      }
     return (
         <>
             <Stack spacing={2}>
@@ -44,7 +46,11 @@ export default function SummaryUtilPage(props) {
                     <Button type="submit" variant="contained" onClick={resetSummary}>Reset Summary Data</Button>
                 </Box>
 
-
+                <Box sx={{ border: '2px solid #E7EBF0', borderRadius: '10px' }} flexDirection={'row'}>
+                    <Typography>Download Positions Data</Typography>
+                    <Button id="Closed" type="submit" variant="contained" onClick={() => handleExportData('Closed')}>Download Closed positions</Button>
+                    <Button id="Open" type="submit" variant="contained" onClick={() => handleExportData('Open')}>Download Open positions</Button>
+                </Box>
 
                 <Box sx={{ border: '2px solid #E7EBF0', borderRadius: '10px' }} flexDirection={'row'}>
                     <Typography >Update stoploss and other related data (strategy, comments, action)</Typography>

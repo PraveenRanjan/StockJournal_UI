@@ -149,3 +149,28 @@ export const updateStopLossData = async (userId, transaction) => {
         console.error('updateStopLossData: ', e)
     }
 }
+
+
+export const exportSummaryCsv =  (userId, type) => {
+    // console.log('exportCsv--> ', type, startDate, endDate);
+    try {
+        const summaryData =  axios({
+            url: `/journal/transactions/summary/exportCsv/${type}`,
+            method: 'get',
+            headers: { 'userId': userId },
+            responseType: 'blob',
+        }).then(response => {
+            console.log(response);
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `${type}-transactions-summary.csv`);
+            document.body.appendChild(link);
+            link.click();
+        });
+        
+    } catch (e) {
+        console.error('Error exporting csv: ', e)
+    }
+
+}
