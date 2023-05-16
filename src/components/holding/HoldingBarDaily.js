@@ -9,11 +9,17 @@ import {
   Tooltip,
   Legend,
   ComposedChart,
-  Line, LabelList,
+  Line, LabelList, Label
 } from "recharts";
 
 export default function HoldingBarDaily(props) {
   const { holdingData } = props;
+
+  const renderCustomizedLabelPct = (props) => {
+    const { content, ...rest } = props;
+    return <Label {...rest} fontSize='x-small' fontWeight="Bold"  />;
+  };
+  
 
   return (
     <div>
@@ -30,11 +36,13 @@ export default function HoldingBarDaily(props) {
         }}
       >
         <CartesianGrid stroke="#f5f5f5" />
-        <XAxis dataKey="date" angle={-15} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <XAxis dataKey="date" angle={70} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <YAxis tick={{ fontSize: 'x-small', fontWeight: 'bold' }} angle={-40} />
+        <YAxis type="number" angle={75} yAxisId="%profit" orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "40px", fontSize: 'small', fontWeight: 'bold' }} />
         <ReferenceLine y={0} stroke="#000" />
+        <Line yAxisId="%profit" type="monotone" dataKey="profitPct" name="%Profit" stroke="#00796b" />
         <Bar dataKey="totalPortfolioValue" fill="#8884d8" name="Portfolio Value"
         >
           <LabelList
@@ -45,6 +53,16 @@ export default function HoldingBarDaily(props) {
             angle="-90"
             fill="#FFF"
             fontSize='small'
+          />
+
+            <LabelList
+            dataKey="profitPct"
+            position="top"
+            // angle="-90"
+            fill="#00796b"
+            fontSize='x-small'
+            fontWeight="Bold"
+            content={renderCustomizedLabelPct}
           />
         </Bar>
         <Line type="monotone" dataKey="totalPortfolioValue" stroke="#0693e3" name="Portfolio Trend" />
@@ -63,7 +81,7 @@ export default function HoldingBarDaily(props) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" interval={0} angle={-15} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <XAxis dataKey="date" interval={0} angle={70} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <YAxis tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "40px" , fontSize: 'small', fontWeight: 'bold' }} />
