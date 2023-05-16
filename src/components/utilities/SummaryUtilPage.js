@@ -21,7 +21,7 @@ export default function SummaryUtilPage(props) {
     }
 
     const resetSummary = () => {
-        resetSummaryData();
+        resetSummaryData(userId);
     }
 
     const updateStopLoss = () => {
