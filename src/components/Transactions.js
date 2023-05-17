@@ -86,8 +86,8 @@ export default function Transections(props) {
     [],
   );
   return (
-    <div style={{ height: 600, width: '100%' }}>
-      {rows && <MaterialReactTable columns={columns} data={rows}
+    <div style={{ width: '100%' }}>
+      {rows && <MaterialReactTable columns={columns} data={rows} style={{innerHeight: 200}}
       renderTopToolbarCustomActions={({ table }) => (
         <Box
           sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}

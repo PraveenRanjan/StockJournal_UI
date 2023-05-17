@@ -71,73 +71,85 @@ export default function Journal() {
   }
 
 
-return (
-  <>
+  return (
+    <>
 
-    <AppBar position="static" color='transparent'>
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Trading Journal
-        </Typography>
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-select-small">User</InputLabel>
-          <Select
-            labelId="demo-select-small"
-            id="demo-select-small"
-            value={userId}
-            label="User"
-            onChange={handleUserSelect}
-          >
-            <MenuItem value={'Test'}>Test</MenuItem>
-            <MenuItem value={'ar'}>AR</MenuItem>
-            <MenuItem value={'pr'}>PR</MenuItem>
-          </Select>
-        </FormControl>
+      <AppBar position="static" color='transparent'>
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Trading Journal
+          </Typography>
+          <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+            <InputLabel id="demo-select-small">User</InputLabel>
+            <Select
+              labelId="demo-select-small"
+              id="demo-select-small"
+              value={userId}
+              label="User"
+              onChange={handleUserSelect}
+            >
+              <MenuItem value={'Test'}>Test</MenuItem>
+              <MenuItem value={'ar'}>AR</MenuItem>
+              <MenuItem value={'pr'}>PR</MenuItem>
+            </Select>
+          </FormControl>
 
-      </Toolbar>
-    </AppBar>
+        </Toolbar>
+      </AppBar>
 
-    {auth ?
-      <>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      {auth ?
+        <>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider', height: 50 }}>
 
-          <Tabs value={value} onChange={handleTabChange} >
-            <Tab label="Transactions" {...a11yProps(0)} />
-            <Tab label="Summary" {...a11yProps(1)} />
-            <Tab label="Summary Table" {...a11yProps(2)} />
-            <Tab label="File upload" {...a11yProps(3)} />
-            <Tab label="Holding" {...a11yProps(4)} />
-            <Tab label="Utilities" {...a11yProps(5)} />
-          </Tabs>
+            <Tabs value={value} onChange={handleTabChange} >
+              <Tab label="Transactions" {...a11yProps(0)} />
+              <Tab label="Summary" {...a11yProps(1)} />
+              <Tab label="Summary Table" {...a11yProps(2)} />
+              <Tab label="File upload" {...a11yProps(3)} />
+              <Tab label="Holding" {...a11yProps(4)} />
+              <Tab label="Utilities" {...a11yProps(5)} />
+            </Tabs>
 
-        </Box>
-        <TabPanel value={value} index={0}>
-          <Transactions userId={userId} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <Summray userId={userId} />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <SummaryTable userId={userId} />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <FileUpload userId={userId} />
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          <HoldingWrapper userId={userId} />
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          <UtilWrapper userId={userId} />
-        </TabPanel>
-      </>
-      :
-      <Alert severity="error">
-        <AlertTitle>Error</AlertTitle>
-        User not select — <strong>Please select User!</strong>
-      </Alert>
-    }
+          </Box>
+          <TabPanel value={value} index={0}>
+            <Box sx={{ height: '76vh',  overflow: 'auto' }} >
+              <Transactions userId={userId} />
+            </Box>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <Box sx={{  height: '76vh',  overflow: 'auto' }} >
+              <Summray userId={userId} />
+            </Box>
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            <Box sx={{  height: '76vh',  overflow: 'auto' }} >
+              <SummaryTable userId={userId} />
+            </Box>
+          </TabPanel>
+          <TabPanel value={value} index={3}>
+            <Box sx={{  height: '76vh',  overflow: 'auto' }} >
+              <FileUpload userId={userId} />
+            </Box>
+          </TabPanel>
+          <TabPanel value={value} index={4}>
+            <Box sx={{  height: '76vh',  overflow: 'auto' }} >
+              <HoldingWrapper userId={userId} />
+            </Box>
+          </TabPanel>
+          <TabPanel value={value} index={5}>
+            <Box sx={{  height: '76vh',  overflow: 'auto' }} >
+              <UtilWrapper userId={userId} />
+            </Box>
+          </TabPanel>
+        </>
+        :
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          User not select — <strong>Please select User!</strong>
+        </Alert>
+      }
 
 
-  </>
-)
+    </>
+  )
 }
