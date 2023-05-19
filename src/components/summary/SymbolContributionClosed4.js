@@ -74,7 +74,7 @@ export default function SymbolContributionClosed4(props) {
     <div> Closed Positions:
       <ComposedChart
         // layout="vertical"
-        width={1450} height={450}
+        width={1700} height={450}
         data={summaryList}
         barSize={12}
         margin={{

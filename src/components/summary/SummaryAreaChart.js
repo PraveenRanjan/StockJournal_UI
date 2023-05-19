@@ -51,7 +51,7 @@ export default function SummaryAreaChart(props) {
   return (
     <>
       <AreaChart
-        width={1500}
+        width={1700}
         height={300}
         data={summaryList}
         syncId="anyId"
@@ -63,7 +63,7 @@ export default function SummaryAreaChart(props) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="symbol" angle={75} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <XAxis dataKey="symbol" angle={75} interval={1} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <YAxis angle={-25} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px", fontSize: 'small', fontWeight: 'bold' }} />
@@ -73,7 +73,7 @@ export default function SummaryAreaChart(props) {
       </AreaChart>
 
       <AreaChart
-        width={1500}
+        width={1700}
         height={300}
         data={summaryList}
         syncId="anyId"
@@ -85,7 +85,7 @@ export default function SummaryAreaChart(props) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="symbol" angle={75} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <XAxis dataKey="symbol" angle={75} interval={1} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <YAxis angle={-25} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <Tooltip />
         <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px", fontSize: 'small', fontWeight: 'bold' }} />

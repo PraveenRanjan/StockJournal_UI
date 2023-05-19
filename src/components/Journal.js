@@ -79,7 +79,7 @@ export default function Journal() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Trading Journal
           </Typography>
-          <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
             <InputLabel id="demo-select-small">User</InputLabel>
             <Select
               labelId="demo-select-small"
@@ -112,32 +112,32 @@ export default function Journal() {
 
           </Box>
           <TabPanel value={value} index={0}>
-            <Box sx={{ height: '76vh',  overflow: 'auto' }} >
+            <Box sx={{ height: '78vh', width: '174vh', overflow: 'auto' }} >
               <Transactions userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Box sx={{  height: '76vh',  overflow: 'auto' }} >
+            <Box sx={{  height: '84vh', width: '174vh',  overflow: 'auto' }} >
               <Summray userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <Box sx={{  height: '76vh',  overflow: 'auto' }} >
+            <Box sx={{  height: '84vh', width: '174vh',  overflow: 'auto' }} >
               <SummaryTable userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={3}>
-            <Box sx={{  height: '76vh',  overflow: 'auto' }} >
+            <Box sx={{  height: '84vh', width: '174vh',  overflow: 'auto' }} >
               <FileUpload userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={4}>
-            <Box sx={{  height: '76vh',  overflow: 'auto' }} >
+            <Box sx={{  height: '84vh', width: '174vh',  overflow: 'auto' }} >
               <HoldingWrapper userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={5}>
-            <Box sx={{  height: '76vh',  overflow: 'auto' }} >
+            <Box sx={{ height: '84vh', width: '174vh',  overflow: 'auto' }} >
               <UtilWrapper userId={userId} />
             </Box>
           </TabPanel>

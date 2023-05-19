@@ -90,7 +90,7 @@ export default function SummarySymbolContributionBarClosed(props) {
       </ComposedChart> */}
       {/* <ResponsiveContainer width="50%" height="50%"> */}
         <LineChart
-          width={1450} height={300}
+          width={1700} height={300}
           data={summaryList}
           margin={{
             top: 10,
@@ -113,7 +113,7 @@ export default function SummarySymbolContributionBarClosed(props) {
         {/* </ResponsiveContainer> */}
 
         <AreaChart
-            width={1450} height={350}
+            width={1700} height={350}
             data={summaryList}
             syncId="anyId"
             margin={{
@@ -130,7 +130,7 @@ export default function SummarySymbolContributionBarClosed(props) {
             <Area type="monotone" dataKey="sellValue" stroke="#8884d8" fill="#8884d8" />
           </AreaChart>
           <AreaChart
-            width={1450} height={350}
+            width={1700} height={350}
             data={summaryList}
             syncId="anyId"
             margin={{
@@ -155,7 +155,7 @@ export default function SummarySymbolContributionBarClosed(props) {
           {/* fill="#82ca9d"  stroke="#82ca9d"  */}
           </AreaChart>
           <AreaChart
-            width={1450} height={300}
+            width={1700} height={300}
             data={summaryList}
             syncId="anyId"
             margin={{
