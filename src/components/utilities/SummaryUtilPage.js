@@ -48,8 +48,12 @@ export default function SummaryUtilPage(props) {
 
                 <Box sx={{ border: '2px solid #E7EBF0', borderRadius: '10px' }} flexDirection={'row'}>
                     <Typography>Download Positions Data</Typography>
-                    <Button id="Closed" type="submit" variant="contained" onClick={() => handleExportData('Closed')}>Download Closed positions</Button>
-                    <Button id="Open" type="submit" variant="contained" onClick={() => handleExportData('Open')}>Download Open positions</Button>
+                    <Grid type="container" spacing={5}>
+            
+                        <Button id="Closed" type="submit" variant="contained" onClick={() => handleExportData('Closed')}>Download Closed positions</Button>
+                        <Button id="Open" type="submit" variant="contained" onClick={() => handleExportData('Open')}>Download Open positions</Button>
+                  
+                    </Grid>
                 </Box>
 
                 <Box sx={{ border: '2px solid #E7EBF0', borderRadius: '10px' }} flexDirection={'row'}>
@@ -66,8 +70,6 @@ export default function SummaryUtilPage(props) {
                                     shrink: true,
                                 }}
                             />
-                        </Grid>
-                        <Grid>
                             <TextField
                                 id="outlined-number"
                                 label="Stoploss"
