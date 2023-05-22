@@ -36,7 +36,7 @@ export default function HoldingBarDaily(props) {
         }}
       >
         <CartesianGrid stroke="#f5f5f5" />
-        <XAxis dataKey="date" angle={70} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
+        <XAxis dataKey="date" angle={50} interval={0} tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <YAxis tick={{ fontSize: 'x-small', fontWeight: 'bold' }} angle={-40} />
         <YAxis type="number" angle={75} yAxisId="%profit" orientation="right" tick={{ fontSize: 'x-small', fontWeight: 'bold' }} />
         <Tooltip />
