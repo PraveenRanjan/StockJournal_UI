@@ -17,7 +17,7 @@ export default function SummaryUtilPage(props) {
 
 
     const updateLTP = () => {
-        updateSummaryLTP();
+        updateSummaryLTP(userId);
     }
 
     const resetSummary = () => {
