@@ -107,6 +107,20 @@ export const getWeeklyHoldingData = async (userId) => {
     }
 }
 
+export const getMonthlyHoldingData = async (userId) => {
+    try {
+        const holdingData = await axios({
+            url: '/journal/month/holdings',
+            method: 'get',
+            headers: { 'userId': userId }
+        })
+        // console.log('tx data--> ', transectionData.data);
+        return holdingData?.data;
+    } catch (e) {
+        console.error('Error getting holding data: ', e)
+    }
+}
+
 export const updateSummaryLTP = async (userId) => {
     try {
         const updateSummaryLTP = await axios({

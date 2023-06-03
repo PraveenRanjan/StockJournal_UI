@@ -117,7 +117,7 @@ export default function Journal() {
             </Box>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Box sx={{  height: '84vh', width: '174vh',  overflow: 'auto' }} >
+            <Box sx={{  height: '84vh', width: '180vh',  overflow: 'auto' }} >
               <Summray userId={userId} />
             </Box>
           </TabPanel>

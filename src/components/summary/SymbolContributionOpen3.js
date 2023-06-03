@@ -38,7 +38,7 @@ function PercentLabel(props) {
     y={y}
     fontSize='x-small'
     fontWeight='bold'
-    fill='blue'
+    fill={fill}
     textAnchor="start">{roundNumber(value / total * 100)}</text>
   )
 };
@@ -132,7 +132,7 @@ export default function SymbolContributionOpen3(props) {
         <Bar dataKey="unrealizedProfit" barSize={8} xAxisId="profit" fill="#0693e3" name="Profit"
          >
         </Bar>
-        <Line dataKey="totalCurrValue" stroke="#ff7300" name="%Contribution" label={<PercentLabel total={total} />} />
+        <Line dataKey="totalCurrValue" stroke="#ff7300" name="%Contribution" label={<PercentLabel total={total} fill="#ff7300"/>} />
       </ComposedChart>
     </div>
   );

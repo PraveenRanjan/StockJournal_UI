@@ -38,7 +38,7 @@ const POSITION_STATUS_CLOSED = 'Closed';
 
 const tableColumnNames = [
 
-  { id: 'symbol', label: 'Symbol' }, { id: 'unsoldQty', label: 'Quantity' }, { id: 'lastTradingPrice', label: 'Last Trade Price' }, { id: 'profit', label: 'Profit' },
+  { id: 'symbol', label: 'Symbol' }, { id: 'unsoldQty', label: 'Curr Quantity' }, { id: 'lastTradingPrice', label: 'Last Trade Price' }, { id: 'profit', label: 'Profit' },
   { id: 'pctReturn', label: 'Return %' }, { id: 'buyValue', label: 'Buy Value' }, { id: 'sellValue', label: 'Sell Value' }, {
     id: 'buyQuantity', label: 'Buy Qty'
   }, { id: 'buyPrice', label: 'Buy Price' }, { id: 'sellQuantity', label: 'Sell Qty' }, { id: 'sellPrice', label: 'Sell Price' }, { id: 'stopLoss', label: 'Stop Loss' },

@@ -80,7 +80,7 @@ export default function Summray(props) {
       <Divider />      
       <Box sx={{ marginTop: 2 }}>
         <Grid container spacing={1}>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box sx={{ marginBottom: 2, marginLeft: 2, background: '#d8e9f0', height: '100%' }}>
               {summaryData &&
                 <SummaryKpiReturn51
@@ -89,14 +89,14 @@ export default function Summray(props) {
               }
             </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box sx={{ marginBottom: 2, marginLeft: 2, background: '#e4e6ef', height: '100%' }}>
               <SummaryKpiReturnNumTimes52
                 stockData={[{ ...summaryData?.transactionKPI?.stockOpen, type: "Open" }, { ...summaryData?.transactionKPI?.stockClosed, type: "Closed" }]}
               />
             </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box sx={{ marginLeft: 2, background: '#8ed1fc', height: '100%' }}>
               <SummaryKpiTable53
                 kpiData=
