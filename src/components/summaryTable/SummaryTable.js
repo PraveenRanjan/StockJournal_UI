@@ -72,9 +72,9 @@ export default function SummaryTable(props) {
 
     useEffect(() => {
         let status = '';
-        if (openStatus && closeStatus) status = '';
         if (openStatus) status = 'Open';
-        else if (closeStatus) status = 'Closed';
+        if (closeStatus) status = 'Closed';
+        if (openStatus && closeStatus) status = '';
         if (data && status && status.length > 0) {
             const openList = data.filter(ele => ele.positionStatus === status);
             setSummaryData(openList);
@@ -91,7 +91,8 @@ export default function SummaryTable(props) {
     }));
 
     const onBtExport = useCallback(() => {
-        gridRef.current.data.exportDataAsExcel();
+        console.log(gridRef.current.api);
+        gridRef.current.api.exportDataAsExcel();
     }, []);
 
     const handleChange = (event) => {
@@ -135,6 +136,7 @@ export default function SummaryTable(props) {
             <div style={{ height: '100%', boxSizing: 'border-box' }}>
                 <div style={gridStyle} className="ag-theme-alpine">
                     <AgGridReact
+                        ref={gridRef}
                         rowSelection="multiple"
                         rowHeight={25}
                         editType="fullRow"
