@@ -10,7 +10,7 @@ import Transactions from './Transactions';
 import FileUpload from './FileUpload';
 import Summray from './summary/Summary';
 import HoldingWrapper from './holding/HoldingWrapper';
-import SummaryTable from './summaryTable/SummaryTable';
+import SummaryTableContainer from './summaryTable/SummaryTableContainer';
 import UtilWrapper from './utilities/UtilWrapper';
 import { Chip, Alert, AlertTitle, FormControl, InputLabel, Select } from '@mui/material';
 
@@ -123,7 +123,7 @@ export default function Journal() {
           </TabPanel>
           <TabPanel value={value} index={2}>
             <Box sx={{  height: '84vh', width: '174vh',  overflow: 'auto' }} >
-              <SummaryTable userId={userId} />
+              <SummaryTableContainer userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={3}>

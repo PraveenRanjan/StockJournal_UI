@@ -1,28 +1,34 @@
 
 import React, { useCallback, useMemo, useRef, useEffect, useState } from 'react';
-
 import { AgGridReact } from 'ag-grid-react';
-
+import FormLabel from '@mui/material/FormLabel';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import { getSummaryData } from '../../api';
+
 import '../../styles.css'
 
 export default function SummaryTable(props) {
+    const { userId, data } = props;
     const gridRef = useRef();
     const containerStyle = useMemo(() => ({ width: '100%', height: '100%' }), []);
     const gridStyle = useMemo(() => ({ height: '96%', width: '100%' }), []);
 
-    const { userId } = props;
     const [summaryData, setSummaryData] = useState();
+    const [openStatus, setOpenStatus] = useState(true);
+    const [closeStatus, setCloseStatus] = useState(false);
 
     const [columnDefs, setColumnDefs] = useState([
         // group cell renderer needed for expand / collapse icons
         {
             headerName: 'Symbol', field: 'symbol', filter: true, suppressSizeToFit: true, width: 150, tooltipField: 'symbol', suppressStickyLabel: true
-            , headerClass: 'currInfo-group', pinned: 'left', cellRenderer: 'agGroupCellRenderer', sortingOrder: ["asc"]
+            , headerClass: 'currInfo-group', pinned: 'left', cellRenderer: 'agGroupCellRenderer', sort: 'asc'
         },
+        { headerName: 'Status', field: 'positionStatus', width: 90, tooltipField: 'positionStatus', },
         { headerName: 'Stop Loss', field: 'stopLoss', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'stopLoss', headerClass: 'currInfo-group', },
         { headerName: 'LTP', field: 'lastTradingPrice', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'lastTradingPrice', headerClass: 'currInfo-group', },
         { headerName: 'Buy Price', field: 'buyPrice', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'buyPrice', headerClass: 'currInfo-group', },
@@ -65,12 +71,17 @@ export default function SummaryTable(props) {
     }, []);
 
     useEffect(() => {
-        getSummaryData(userId).then(data => {
-            const openList = data.summaryList.filter(ele => ele.positionStatus === 'Open');
-            console.log('openList : ', openList);
+        let status = '';
+        if (openStatus && closeStatus) status = '';
+        if (openStatus) status = 'Open';
+        else if (closeStatus) status = 'Closed';
+        if (data && status && status.length > 0) {
+            const openList = data.filter(ele => ele.positionStatus === status);
             setSummaryData(openList);
-        });
-    }, [userId]);
+        } else {
+            setSummaryData(data);
+        }
+    }, [userId, data, openStatus, closeStatus]);
 
     const defaultColDef = useMemo(() => ({
         sortable: true,
@@ -81,7 +92,14 @@ export default function SummaryTable(props) {
 
     const onBtExport = useCallback(() => {
         gridRef.current.data.exportDataAsExcel();
-      }, []);
+    }, []);
+
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.checked;
+        if (name === 'Open') setOpenStatus(value);
+        else if (name === 'Closed') setCloseStatus(value);
+    };
 
     return (
         <div style={containerStyle}>
@@ -92,6 +110,26 @@ export default function SummaryTable(props) {
                 >
                     Export to Excel
                 </button>
+            </div>
+
+            <div className="container">
+                <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+                    <FormLabel component="legend">Position Status: </FormLabel>
+                    <FormGroup>
+                        <FormControlLabel
+                            control={
+                                <Checkbox checked={openStatus} onChange={handleChange} name="Open" />
+                            }
+                            label="Open"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox checked={closeStatus} onChange={handleChange} name="Closed" />
+                            }
+                            label="Closed"
+                        />
+                    </FormGroup>
+                </FormControl>
             </div>
 
             <div style={{ height: '100%', boxSizing: 'border-box' }}>
