@@ -112,32 +112,32 @@ export default function Journal() {
 
           </Box>
           <TabPanel value={value} index={0}>
-            <Box sx={{ height: '78vh', width: '174vh', overflow: 'auto' }} >
+            <Box sx={{ height: '72vh' }} >
               <Transactions userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Box sx={{  height: '84vh', width: '180vh',  overflow: 'auto' }} >
+            <Box sx={{  height: '72vh', overflowY: 'auto'}} >
               <Summray userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <Box sx={{  height: '84vh', width: '174vh',  overflow: 'auto' }} >
+            <Box sx={{  height: '72vh'}} >
               <SummaryTableContainer userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={3}>
-            <Box sx={{  height: '84vh', width: '174vh',  overflow: 'auto' }} >
+            <Box sx={{  height: '72vh' }} >
               <FileUpload userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={4}>
-            <Box sx={{  height: '84vh', width: '174vh',  overflow: 'auto' }} >
+            <Box sx={{  height: '72vh', overflowY: 'auto' }} >
               <HoldingWrapper userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={5}>
-            <Box sx={{ height: '84vh', width: '174vh',  overflow: 'auto' }} >
+            <Box sx={{ height: '72vh', overflowY: 'auto' }} >
               <UtilWrapper userId={userId} />
             </Box>
           </TabPanel>

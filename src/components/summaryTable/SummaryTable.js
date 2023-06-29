@@ -11,6 +11,7 @@ import 'ag-grid-enterprise';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 import '../../styles.css'
+import { Grid, Button } from '@mui/material';
 
 export default function SummaryTable(props) {
     const { userId, data } = props;
@@ -104,34 +105,35 @@ export default function SummaryTable(props) {
 
     return (
         <div style={containerStyle}>
-            <div className="container">
-                <button
-                    onClick={onBtExport}
-                    style={{ marginBottom: '5px', fontWeight: 'bold' }}
-                >
-                    Export to Excel
-                </button>
-            </div>
+            <Grid container spacing={1}>
+                <Grid item xs={2}>
+                    <Button variant='contained' onClick={onBtExport}>
+                        Export to Excel
+                    </Button>
+                </Grid>
+                <Grid item xs={8}>
+                    <FormControl sx={{ m: 0 }} component="fieldset" variant="standard" >
+                        <FormLabel component="legend">Position Status: </FormLabel>
+                        <FormGroup row sx={{ m: 0 }}>
+                            <FormControlLabel sx={{ m: 0 }}
+                                control={
+                                    <Checkbox checked={openStatus} onChange={handleChange} name="Open" />
+                                }
+                                label="Open"
+                            />
+                            <FormControlLabel sx={{ m: 0 }}
+                                control={
+                                    <Checkbox checked={closeStatus} onChange={handleChange} name="Closed" />
+                                }
+                                label="Closed"
+                            />
+                        </FormGroup>
+                    </FormControl>
+                </Grid>
+            </Grid>
 
-            <div className="container">
-                <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-                    <FormLabel component="legend">Position Status: </FormLabel>
-                    <FormGroup>
-                        <FormControlLabel
-                            control={
-                                <Checkbox checked={openStatus} onChange={handleChange} name="Open" />
-                            }
-                            label="Open"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox checked={closeStatus} onChange={handleChange} name="Closed" />
-                            }
-                            label="Closed"
-                        />
-                    </FormGroup>
-                </FormControl>
-            </div>
+
+
 
             <div style={{ height: '100%', boxSizing: 'border-box' }}>
                 <div style={gridStyle} className="ag-theme-alpine">
