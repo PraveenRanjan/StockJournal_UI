@@ -9,7 +9,7 @@ export default function HoldingDaily(props) {
 
   useEffect(() => {
     getMonthlyHoldingData(userId).then(data => {
-      console.log('Holding data--> ', data);
+      // console.log('Holding data--> ', data);
       setHoldingData(data);
     });
   }, [userId]);

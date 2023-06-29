@@ -1,7 +1,6 @@
 
 import React, { useCallback, useMemo, useRef, useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -21,7 +20,6 @@ export default function SummaryTable(props) {
 
     const [summaryData, setSummaryData] = useState();
     const [openStatus, setOpenStatus] = useState(true);
-    const [closeStatus, setCloseStatus] = useState(false);
 
     const [columnDefs, setColumnDefs] = useState([
         // group cell renderer needed for expand / collapse icons
@@ -29,7 +27,7 @@ export default function SummaryTable(props) {
             headerName: 'Symbol', field: 'symbol', filter: true, suppressSizeToFit: true, width: 150, tooltipField: 'symbol', suppressStickyLabel: true
             , headerClass: 'currInfo-group', pinned: 'left', cellRenderer: 'agGroupCellRenderer', sort: 'asc'
         },
-        { headerName: 'Status', field: 'positionStatus', width: 90, tooltipField: 'positionStatus', },
+
         { headerName: 'Stop Loss', field: 'stopLoss', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'stopLoss', headerClass: 'currInfo-group', },
         { headerName: 'LTP', field: 'lastTradingPrice', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'lastTradingPrice', headerClass: 'currInfo-group', },
         { headerName: 'Buy Price', field: 'buyPrice', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'buyPrice', headerClass: 'currInfo-group', },
@@ -37,6 +35,7 @@ export default function SummaryTable(props) {
         { headerName: 'Curr Value', field: 'totalCurrValue', filter: true, suppressSizeToFit: true, width: 97, tooltipField: 'totalCurrValue', headerClass: 'currInfo-group', },
         { headerName: 'Curr Profit', field: 'unrealizedProfit', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'unrealizedProfit', headerClass: 'currInfo-group', },
         { headerName: '%Curr Profit', field: 'unrealizedProfitPct', filter: true, suppressSizeToFit: true, width: 92, tooltipField: 'unrealizedProfitPct', headerClass: 'currInfo-group', },
+        { headerName: 'Status', field: 'positionStatus', suppressSizeToFit: true, width: 100, tooltipField: 'positionStatus', },
         { headerName: 'Profit', field: 'profit', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'profit', },
         { headerName: '%Profit', field: 'pctReturn', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'pctReturn', },
         { headerName: 'Buy Value', field: 'buyValue', filter: true, suppressSizeToFit: true, width: 130, tooltipField: 'buyValue', },
@@ -74,15 +73,13 @@ export default function SummaryTable(props) {
     useEffect(() => {
         let status = '';
         if (openStatus) status = 'Open';
-        if (closeStatus) status = 'Closed';
-        if (openStatus && closeStatus) status = '';
         if (data && status && status.length > 0) {
             const openList = data.filter(ele => ele.positionStatus === status);
             setSummaryData(openList);
         } else {
             setSummaryData(data);
         }
-    }, [userId, data, openStatus, closeStatus]);
+    }, [userId, data, openStatus]);
 
     const defaultColDef = useMemo(() => ({
         sortable: true,
@@ -92,15 +89,11 @@ export default function SummaryTable(props) {
     }));
 
     const onBtExport = useCallback(() => {
-        console.log(gridRef.current.api);
         gridRef.current.api.exportDataAsExcel();
     }, []);
 
     const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.checked;
-        if (name === 'Open') setOpenStatus(value);
-        else if (name === 'Closed') setCloseStatus(value);
+        setOpenStatus(event.target.checked);
     };
 
     return (
@@ -113,28 +106,17 @@ export default function SummaryTable(props) {
                 </Grid>
                 <Grid item xs={8}>
                     <FormControl sx={{ m: 0 }} component="fieldset" variant="standard" >
-                        <FormLabel component="legend">Position Status: </FormLabel>
                         <FormGroup row sx={{ m: 0 }}>
                             <FormControlLabel sx={{ m: 0 }}
                                 control={
                                     <Checkbox checked={openStatus} onChange={handleChange} name="Open" />
                                 }
-                                label="Open"
-                            />
-                            <FormControlLabel sx={{ m: 0 }}
-                                control={
-                                    <Checkbox checked={closeStatus} onChange={handleChange} name="Closed" />
-                                }
-                                label="Closed"
+                                label="Open Positions"
                             />
                         </FormGroup>
                     </FormControl>
                 </Grid>
             </Grid>
-
-
-
-
             <div style={{ height: '100%', boxSizing: 'border-box' }}>
                 <div style={gridStyle} className="ag-theme-alpine">
                     <AgGridReact

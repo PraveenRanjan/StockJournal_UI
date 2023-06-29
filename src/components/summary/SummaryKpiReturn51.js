@@ -14,7 +14,7 @@ import {
 
 export default function SummaryKpiReturn51(props) {
     const { stockData } = props;
-    console.log('stockData--> ', stockData);
+    // console.log('stockData--> ', stockData);
 
 
     return (

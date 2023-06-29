@@ -24,7 +24,7 @@ export default function FileUpload(props) {
   const [date, setDate] = useState(dayjs());
 
   const handleFileChange = (files) => {
-    console.log('files--> ', files);
+    // console.log('files--> ', files);
     if (files.length) {
       setFile(files[0]);
     }
@@ -37,11 +37,11 @@ export default function FileUpload(props) {
   };
 
   const handleCash = (event) => {
-    console.log('handleCash-> ', event.target.value)
+    // console.log('handleCash-> ', event.target.value)
     setCash(event.target.value);
   }
   const handleFund = (event) => {
-    console.log('handleCash-> ', event.target.value)
+    // console.log('handleCash-> ', event.target.value)
     setNewFund(event.target.value);
   }
   const handleClick = (event) => {

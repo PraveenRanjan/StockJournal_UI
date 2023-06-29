@@ -57,7 +57,7 @@ const renderCustomizedLabelPct = (props) => {
 
 export default function SymbolContributionClosed4(props) {
   const { summaryList } = props;
-  console.log('summaryList in closed contribution = ', summaryList );
+  // console.log('summaryList in closed contribution = ', summaryList );
 
   const [totalProfit, setTotalProfit] = useState(0);
 

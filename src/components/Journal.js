@@ -6,7 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import MenuItem from '@mui/material/MenuItem';
-import Transactions from './Transactions';
+import Transactions from './transactions/Transactions';
 import FileUpload from './FileUpload';
 import Summray from './summary/Summary';
 import HoldingWrapper from './holding/HoldingWrapper';
@@ -59,7 +59,7 @@ export default function Journal() {
   };
 
   const handleMenuClose = (value) => {
-    console.log('menu value-> ', value);
+    // console.log('menu value-> ', value);
     setUserId(value);
     setAuth(true);
     setAnchorEl(null);
@@ -112,17 +112,17 @@ export default function Journal() {
 
           </Box>
           <TabPanel value={value} index={0}>
-            <Box sx={{ height: '72vh' }} >
+            <Box sx={{ height: '79vh', width: '164vh' }} >
               <Transactions userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Box sx={{  height: '72vh', overflowY: 'auto'}} >
+            <Box sx={{ height: '79vh', width: '164vh' }} >
               <Summray userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <Box sx={{  height: '72vh'}} >
+            <Box sx={{ height: '79vh', width: '173vh' }} >
               <SummaryTableContainer userId={userId} />
             </Box>
           </TabPanel>

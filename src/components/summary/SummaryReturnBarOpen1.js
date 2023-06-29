@@ -17,7 +17,7 @@ const renderCustomizedLabel = (props) => {
 
   var position = "center";
   if (props.value < 0) {
-    console.log('less than 0');
+    // console.log('less than 0');
     position = "bottom";
   }
   return <Label {...rest} fontSize='x-small' fill="purple" fontWeight="Bold" angle="-90" position={position} />;

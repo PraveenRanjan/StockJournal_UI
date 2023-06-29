@@ -59,7 +59,7 @@ export default function SymbolContributionOpen3(props) {
   const { summaryList } = props;
   const [total, setTotal] = useState(0);
   const [totalProfit, setTotalProfit] = useState(0);
-  console.log('summaryList in open contribution = ', summaryList );
+  // console.log('summaryList in open contribution = ', summaryList );
 
   useEffect(() => {
     const totalValue = summaryList?.reduce((result, entry) => (result + entry.totalCurrValue), 0);
