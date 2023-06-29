@@ -10,6 +10,7 @@ import { getSummaryData } from '../../api';
 import '../../styles.css'
 
 export default function SummaryTable(props) {
+    const gridRef = useRef();
     const containerStyle = useMemo(() => ({ width: '100%', height: '100%' }), []);
     const gridStyle = useMemo(() => ({ height: '96%', width: '100%' }), []);
 
@@ -19,8 +20,8 @@ export default function SummaryTable(props) {
     const [columnDefs, setColumnDefs] = useState([
         // group cell renderer needed for expand / collapse icons
         {
-            headerName: 'Symbol', field: 'symbol', filter: true, suppressSizeToFit: true, width: 125, tooltipField: 'symbol', suppressStickyLabel: true
-            , headerClass: 'currInfo-group', pinned: 'left', cellRenderer: 'agGroupCellRenderer'
+            headerName: 'Symbol', field: 'symbol', filter: true, suppressSizeToFit: true, width: 150, tooltipField: 'symbol', suppressStickyLabel: true
+            , headerClass: 'currInfo-group', pinned: 'left', cellRenderer: 'agGroupCellRenderer', sortingOrder: ["asc"]
         },
         { headerName: 'Stop Loss', field: 'stopLoss', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'stopLoss', headerClass: 'currInfo-group', },
         { headerName: 'LTP', field: 'lastTradingPrice', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'lastTradingPrice', headerClass: 'currInfo-group', },
@@ -78,8 +79,21 @@ export default function SummaryTable(props) {
         wrapHeaderText: true,
     }));
 
+    const onBtExport = useCallback(() => {
+        gridRef.current.data.exportDataAsExcel();
+      }, []);
+
     return (
         <div style={containerStyle}>
+            <div className="container">
+                <button
+                    onClick={onBtExport}
+                    style={{ marginBottom: '5px', fontWeight: 'bold' }}
+                >
+                    Export to Excel
+                </button>
+            </div>
+
             <div style={{ height: '100%', boxSizing: 'border-box' }}>
                 <div style={gridStyle} className="ag-theme-alpine">
                     <AgGridReact
