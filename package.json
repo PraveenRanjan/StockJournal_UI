@@ -1,5 +1,5 @@
 {
-  "name": "material-cra",
+  "name": "stock-UI",
   "version": "5.0.0",
   "private": true,
   "homepage": ".",
@@ -21,7 +21,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "latest",
-    "recharts": "2.4.0"
+    "recharts": "2.4.0",
+    "ag-grid-community": "30.0.2",
+    "ag-grid-enterprise": "30.0.2",
+    "ag-grid-react": "30.0.2"
   },
   "browserslist": {
     "production": [
