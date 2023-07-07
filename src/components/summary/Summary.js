@@ -197,9 +197,9 @@ export default function Summray(props) {
         />
       </Box>
       <Divider />
-      <Box sx={{ flexGrow: 1, marginTop: 2 }}>
+      {/* <Box sx={{ flexGrow: 1, marginTop: 2 }}>
         <CollapsibleTable tableData={summaryData?.summaryList} />
-      </Box>
+      </Box> */}
     </>
   );
 }

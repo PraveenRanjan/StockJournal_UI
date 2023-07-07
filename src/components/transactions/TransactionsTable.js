@@ -9,8 +9,8 @@ import '../../styles.css'
 export default function TransactionsTable(props) {
     const { userId, rows } = props;
     const gridRef = useRef();
-    const containerStyle = useMemo(() => ({ width: '100%', height: '100%' }), []);
-    const gridStyle = useMemo(() => ({ height: '96%', width: '100%' }), []);
+    const containerStyle = useMemo(() => ({ width: '100%', height: '98%' }), []);
+    const gridStyle = useMemo(() => ({ height: '94%', width: '100%' }), []);
 
     const [transactionsData, setTransactionsData] = useState();
     const [columnDefs, setColumnDefs] = useState([
@@ -49,12 +49,13 @@ export default function TransactionsTable(props) {
                     <AgGridReact
                         // ref={gridRef}
                         // rowSelection="multiple"
-                        rowHeight={25}
+                        rowHeight={22}
                         // editType="fullRow"
                         
                         columnDefs={columnDefs}
                         defaultColDef={defaultColDef} // Default Column Properties
                         rowData={transactionsData}
+                        pagination={true}
                     />
                 </div>
             </div>

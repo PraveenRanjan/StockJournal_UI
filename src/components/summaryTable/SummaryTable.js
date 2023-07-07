@@ -129,6 +129,7 @@ export default function SummaryTable(props) {
                         defaultColDef={defaultColDef} // Default Column Properties
                         rowData={summaryData}
                         masterDetail={true}
+                        multiSortKey={'ctrl'}
                         // detailRowAutoHeight={true}
                         detailCellRendererParams={detailCellRendererParams}
                         detailRowHeight={500}

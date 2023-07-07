@@ -22,6 +22,7 @@ export default function FileUpload(props) {
   const [showCash, setShowCash] = useState(false);
   const [file, setFile] = useState();
   const [date, setDate] = useState(dayjs());
+  const [retryCnt, setRetryCnt] = useState(-1);
 
   const handleFileChange = (files) => {
     // console.log('files--> ', files);
@@ -45,8 +46,12 @@ export default function FileUpload(props) {
     setNewFund(event.target.value);
   }
   const handleClick = (event) => {
-
-    uploadFile(userId, type, file, dayjs(date).format('YYYY-MM-DD'), cash, newFund);
+    if (retryCnt < 1) {
+      alert('Please check the selected user. Select the correct user and try again. You will be stopped for 2 times');
+      setRetryCnt(retryCnt + 1);
+    } else {
+      uploadFile(userId, type, file, dayjs(date).format('YYYY-MM-DD'), cash, newFund).then(data => setRetryCnt(-1));
+    }
   }
 
   const handleDate = (input) => {

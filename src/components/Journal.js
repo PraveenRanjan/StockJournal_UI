@@ -132,12 +132,12 @@ export default function Journal() {
             </Box>
           </TabPanel>
           <TabPanel value={value} index={4}>
-            <Box sx={{  height: '72vh', overflowY: 'auto' }} >
+            <Box sx={{  height: '75vh', width: '160vh' }} >
               <HoldingWrapper userId={userId} />
             </Box>
           </TabPanel>
           <TabPanel value={value} index={5}>
-            <Box sx={{ height: '72vh', overflowY: 'auto' }} >
+            <Box sx={{ height: '72vh', width: '160vh' }} >
               <UtilWrapper userId={userId} />
             </Box>
           </TabPanel>
