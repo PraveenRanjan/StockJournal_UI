@@ -27,7 +27,7 @@ export default function SummaryTable(props) {
             headerName: 'Symbol', field: 'symbol', filter: true, suppressSizeToFit: true, width: 150, tooltipField: 'symbol', suppressStickyLabel: true
             , headerClass: 'currInfo-group', pinned: 'left', cellRenderer: 'agGroupCellRenderer', sort: 'asc'
         },
-
+        { headerName: 'SL Alert', field: 'stopLossAlert', filter: true, suppressSizeToFit: true, width: 90, tooltipField: 'stopLossAlert', headerClass: 'currInfo-group', },
         { headerName: 'Stop Loss', field: 'stopLoss', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'stopLoss', headerClass: 'currInfo-group', },
         { headerName: 'LTP', field: 'lastTradingPrice', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'lastTradingPrice', headerClass: 'currInfo-group', },
         { headerName: 'Buy Price', field: 'buyPrice', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'buyPrice', headerClass: 'currInfo-group', },
