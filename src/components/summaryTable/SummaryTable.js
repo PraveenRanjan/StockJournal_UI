@@ -32,7 +32,12 @@ export default function SummaryTable(props) {
         { headerName: 'LTP', field: 'lastTradingPrice', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'lastTradingPrice', headerClass: 'currInfo-group', },
         { headerName: 'Buy Price', field: 'buyPrice', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'buyPrice', headerClass: 'currInfo-group', },
         { headerName: 'Curr Qty', field: 'unsoldQty', filter: true, suppressSizeToFit: true, width: 87, tooltipField: 'unsoldQty', headerClass: 'currInfo-group', },
-        { headerName: 'Curr Value', field: 'totalCurrValue', filter: true, suppressSizeToFit: true, width: 97, tooltipField: 'totalCurrValue', headerClass: 'currInfo-group', },
+        {
+            headerName: 'Curr Value', field: 'totalCurrValue', filter: true, suppressSizeToFit: true, width: 97, tooltipField: 'totalCurrValue', headerClass: 'currInfo-group',
+            aggFunc: "sum",
+            editable: false,
+            valueParser: "Number(newValue)"
+        },
         { headerName: 'Curr Profit', field: 'unrealizedProfit', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'unrealizedProfit', headerClass: 'currInfo-group', },
         { headerName: '%Curr Profit', field: 'unrealizedProfitPct', filter: true, suppressSizeToFit: true, width: 92, tooltipField: 'unrealizedProfitPct', headerClass: 'currInfo-group', },
         { headerName: 'Status', field: 'positionStatus', suppressSizeToFit: true, width: 100, tooltipField: 'positionStatus', },
@@ -117,24 +122,23 @@ export default function SummaryTable(props) {
                     </FormControl>
                 </Grid>
             </Grid>
-            <div style={{ height: '100%', boxSizing: 'border-box' }}>
-                <div style={gridStyle} className="ag-theme-alpine">
-                    <AgGridReact
-                        ref={gridRef}
-                        rowSelection="multiple"
-                        rowHeight={25}
-                        editType="fullRow"
-                        suppressRowClickSelection
-                        columnDefs={columnDefs}
-                        defaultColDef={defaultColDef} // Default Column Properties
-                        rowData={summaryData}
-                        masterDetail={true}
-                        multiSortKey={'ctrl'}
-                        // detailRowAutoHeight={true}
-                        detailCellRendererParams={detailCellRendererParams}
-                        detailRowHeight={500}
-                    />
-                </div>
+            <div style={{ height: '100%', boxSizing: 'border-box' }} className="ag-theme-alpine">
+                <AgGridReact
+                    ref={gridRef}
+                    rowSelection="multiple"
+                    rowHeight={25}
+                    editType="fullRow"
+                    suppressRowClickSelection
+                    columnDefs={columnDefs}
+                    defaultColDef={defaultColDef} // Default Column Properties
+                    rowData={summaryData}
+                    masterDetail={true}
+                    multiSortKey={'ctrl'}
+                    // detailRowAutoHeight={true}
+                    detailCellRendererParams={detailCellRendererParams}
+                    detailRowHeight={500}
+                    groupIncludeTotalFooter='true'
+                />
             </div>
         </div>
 
