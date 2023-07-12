@@ -25,7 +25,6 @@ export default function SummaryUtilPage(props) {
     }
 
     const updateStopLoss = () => {
-        console.log(userId, transaction);
         updateStopLossData(userId, transaction);
     }
 

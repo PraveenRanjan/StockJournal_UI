@@ -9,7 +9,7 @@ export const getTransectionData = async (userId) => {
             method: 'get',
             headers: { 'userId': userId }
         })
-        // console.log('tx data--> ', transectionData.data);
+
         return transectionData?.data;
     } catch (e) {
         console.error('Error getting transaction data: ', e)
@@ -128,7 +128,6 @@ export const updateSummaryLTP = async (userId) => {
             method: 'get',
             headers: { 'userId': userId }
         })
-        console.log("updated")
         return "Updated";
     } catch (e) {
         console.error('Error updating LTP for transaction summary data ', e)
@@ -142,7 +141,6 @@ export const resetSummaryData = async (userId) => {
             method: 'get',
             headers: { 'userId': userId }
         })
-        console.log("updated")
         return "Data reset";
     } catch (e) {
         console.error('Error resetting transaction summary data to previous day ', e)
@@ -174,7 +172,6 @@ export const exportSummaryCsv =  (userId, type) => {
             headers: { 'userId': userId },
             responseType: 'blob',
         }).then(response => {
-            console.log(response);
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;

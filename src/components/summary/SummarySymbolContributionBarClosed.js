@@ -33,7 +33,6 @@ function CustomizedLabel(props) {
 function RetPercentLabel(props) {
   const { x, y, fill, value, summaryList } = props;
   const elem = summaryList.filter(summary => summary.pctReturn == value)
-  console.log('elem = ', elem );
   return (<text
     x={x}
     y={y}

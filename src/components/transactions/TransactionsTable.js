@@ -31,7 +31,6 @@ export default function TransactionsTable(props) {
     ]);
 
     useEffect(() => { 
-        console.log('rows :', rows);
         setTransactionsData(rows);
     }, [userId, rows]);
 

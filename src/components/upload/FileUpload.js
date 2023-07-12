@@ -1,7 +1,7 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import dayjs from 'dayjs';
 import { DropzoneArea } from "mui-file-dropzone";
-import { uploadFile } from "../api";
+import { uploadFile } from "../../api";
 import { Grid, TextField } from '@mui/material';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -10,7 +10,8 @@ import FormControl from '@mui/material/FormControl';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { HOLDINGS, TRANSACTIONS } from '../Constants';
+import { HOLDINGS, TRANSACTIONS } from '../../Constants';
+import ConfirmDialog from './ConfirmDialog';
 
 
 
@@ -22,11 +23,14 @@ export default function FileUpload(props) {
   const [showCash, setShowCash] = useState(false);
   const [file, setFile] = useState();
   const [date, setDate] = useState(dayjs());
-  const [retryCnt, setRetryCnt] = useState(-1);
+  const [fileUploaded, setFileUploaded] = useState(false);
+
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleFileChange = (files) => {
     // console.log('files--> ', files);
     if (files.length) {
+      setFileUploaded(true);
       setFile(files[0]);
     }
   }
@@ -46,11 +50,17 @@ export default function FileUpload(props) {
     setNewFund(event.target.value);
   }
   const handleClick = (event) => {
-    if (retryCnt < 1) {
-      alert('Please check the selected user. Select the correct user and try again. You will be stopped for 2 times');
-      setRetryCnt(retryCnt + 1);
-    } else {
-      uploadFile(userId, type, file, dayjs(date).format('YYYY-MM-DD'), cash, newFund).then(data => setRetryCnt(-1));
+    if (fileUploaded) {
+      setDialogOpen(true);
+    }
+  }
+
+  const handleUploadOk = (okClicked) => {
+    setDialogOpen(false);
+    if (fileUploaded && okClicked) {
+      uploadFile(userId, type, file, dayjs(date).format('YYYY-MM-DD'), cash, newFund);
+      setFileUploaded(false);
+      setFile(null);
     }
   }
 
@@ -60,7 +70,10 @@ export default function FileUpload(props) {
 
   return (
     <>
-
+      { dialogOpen && <ConfirmDialog
+        dialogOpen={dialogOpen}
+        userId={userId}
+        confirmOk={handleUploadOk} /> }
       <Grid container spacing={8}>
         <Grid item xs={6}>
           <DropzoneArea onChange={handleFileChange} filesLimit={1} />
@@ -68,9 +81,9 @@ export default function FileUpload(props) {
         <Grid item xs={4}>
           <FormControl>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker value={date} onChange={handleDate}/>
+              <DatePicker value={date} onChange={handleDate} />
             </LocalizationProvider>
-            
+
             <RadioGroup
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
@@ -106,7 +119,7 @@ export default function FileUpload(props) {
               </>
             }
 
-            <button type="submit" onClick={handleClick}>Submit</button>
+            <button disabled={!fileUploaded} type="submit" onClick={handleClick}>Submit</button>
           </FormControl>
         </Grid>
 

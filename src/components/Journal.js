@@ -7,7 +7,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import MenuItem from '@mui/material/MenuItem';
 import Transactions from './transactions/Transactions';
-import FileUpload from './FileUpload';
+import FileUpload from './upload/FileUpload';
 import Summray from './summary/Summary';
 import HoldingWrapper from './holding/HoldingWrapper';
 import SummaryTableContainer from './summaryTable/SummaryTableContainer';
