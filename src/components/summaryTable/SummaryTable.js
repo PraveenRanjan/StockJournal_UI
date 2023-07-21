@@ -38,10 +38,20 @@ export default function SummaryTable(props) {
             editable: false,
             valueParser: "Number(newValue)"
         },
-        { headerName: 'Curr Profit', field: 'unrealizedProfit', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'unrealizedProfit', headerClass: 'currInfo-group', },
+        {
+            headerName: 'Curr Profit', field: 'unrealizedProfit', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'unrealizedProfit', headerClass: 'currInfo-group',
+            aggFunc: "sum",
+            editable: false,
+            valueParser: "Number(newValue)"
+        },
         { headerName: '%Curr Profit', field: 'unrealizedProfitPct', filter: true, suppressSizeToFit: true, width: 92, tooltipField: 'unrealizedProfitPct', headerClass: 'currInfo-group', },
         { headerName: 'Status', field: 'positionStatus', suppressSizeToFit: true, width: 100, tooltipField: 'positionStatus', },
-        { headerName: 'Profit', field: 'profit', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'profit', },
+        {
+            headerName: 'Profit', field: 'profit', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'profit',
+            aggFunc: "sum",
+            editable: false,
+            valueParser: "Number(newValue)"
+        },
         { headerName: '%Profit', field: 'pctReturn', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'pctReturn', },
         { headerName: 'Buy Value', field: 'buyValue', filter: true, suppressSizeToFit: true, width: 130, tooltipField: 'buyValue', },
         { headerName: 'Buy Qty', field: 'buyQuantity', filter: true, suppressSizeToFit: true, width: 100, tooltipField: 'buyQuantity', },
